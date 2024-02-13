@@ -96,7 +96,7 @@ header{
     h2 {
         text-align: center;
         font-size: 25px;
-        margin-top: 30px;
+        margin-top: 55px;
         margin-bottom: -10px;
         text-transform: uppercase;
         color: rgb(255, 255, 255);
@@ -113,13 +113,13 @@ header{
     }
     #menu ul li {
         display: inline-block; /* Cambiado de inline-block a block para una mejor apariencia en dispositivos móviles */
-        margin-bottom: 5px; /* Espaciado entre elementos del menú en dispositivos móviles */
-    }
+        }
     #menu ul li a {
         color: white;
         display: block;
         text-decoration: none;
-        padding: 5px 18px; /* Reducido el relleno para dispositivos móviles */
+        padding: 15px 20px 0px 20px; /* Reducido el relleno para dispositivos móviles */
+        width: 100px;
     }
 
 }
