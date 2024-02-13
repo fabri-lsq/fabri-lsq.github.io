@@ -17,7 +17,7 @@ body{
 }
 .gallery{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     margin: 5%;
     grid-gap: 30px;
     filter: drop-shadow(6px 6px 5px rgb(107, 64, 224));
