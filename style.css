@@ -21,8 +21,6 @@ body{
     margin: 5%;
     grid-gap: 30px;
     filter: drop-shadow(6px 6px 5px rgb(107, 64, 224));
-    flex-basis: 20rem;
-    flex-grow: 999;
 }
 .gallery img{
     width: 100%;
@@ -85,4 +83,43 @@ header{
 }
 .nolotengo {
     filter: grayscale(100%);
+}
+
+@media only screen and (max-width:550px){
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        margin: 5%;
+        grid-gap: 15px; /* Reducido el espacio entre imágenes para dispositivos pequeños */
+        filter: drop-shadow(6px 6px 5px rgb(107, 64, 224));
+    }
+    h2 {
+        text-align: center;
+        font-size: 25px;
+        margin-top: 30px;
+        margin-bottom: -10px;
+        text-transform: uppercase;
+        color: rgb(255, 255, 255);
+        padding: 10px 0px;
+        text-shadow: 4px 4px 3px rgb(0, 0, 0);
+    }
+    .containter {
+        width: 100%;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 8%; /* Aumentado el espacio alrededor del contenido */
+    }
+    #menu ul li {
+        display: inline-block; /* Cambiado de inline-block a block para una mejor apariencia en dispositivos móviles */
+        margin-bottom: 5px; /* Espaciado entre elementos del menú en dispositivos móviles */
+    }
+    #menu ul li a {
+        color: white;
+        display: block;
+        text-decoration: none;
+        padding: 5px 18px; /* Reducido el relleno para dispositivos móviles */
+    }
+
 }
