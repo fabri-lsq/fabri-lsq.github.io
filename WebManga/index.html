@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Solazo.ico">
+    <script src="script.js"></script>    
+</head>
+<body >
+    <header>
+        <nav id="menu"> <!-- El indice que aparece siempre -->
+            <ul>
+                <li><a class="phomea" href="../index.html"><img class="phome" src="../Home1.png"></a></li>
+                <li><a href="index.html">Mangas</a></li>
+                <li><input type="text" id="buscador" class="search-box"  placeholder="Buscar..." oninput="filtrarImagenes()"></li>
+                <li><a href="tomosunicos.html">TomosUnicos</a></li>
+                <li><a href="faltan.html">Faltan</a></li>
+                <li><a href="alternativas.html">Alternativas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="flex-center">
+        <h2>Mangas</h2>
+    </div>
+
+    <div id="contador-imagenes"></div>
+
+    <!-- Menú desplegable para ordenar las imágenes -->
+    <div id="menu2">
+        <label for="ordenar">Ordenar por:</label>
+        <select id="ordenar" onchange="ordenarImagenes('all', this.value, 'no')">
+            <option value="nombre">Nombre ↓</option>
+            <option value="nombre2">Nombre ↑</option>
+            <option value="tenencia">LoTengo</option>
+            <option value="nolotengoA-Z">NoLoTengo</option>
+        </select>
+    </div>
+
+    <div class="container" id="mangas">
+        <div class="gallery" id="tomos">
+            
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <div class="image-container">
+                <img id="modal-image" src="" alt="">
+            </div>
+            <div class="content-container">
+                <div id="modal-text"></div> <!-- Este es el nuevo elemento para el texto -->
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        mostrarImagenesPorRuta('all',"nombre","si");
+    </script>
+</body>
+</html>

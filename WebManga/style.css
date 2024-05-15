@@ -1,0 +1,348 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+body{
+    background-color: #202124;
+}
+
+
+/*  Nav class="menu"    */
+.phome {
+    width: 35px;
+    height: 35px;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle; /* Alinea verticalmente la imagen */
+    filter: drop-shadow(-6px -600px -50px rgb(165, 133, 255));
+}
+#menu {
+    background-color: rgb(107, 64, 224);
+    position: fixed;top: 0% ;
+    left: 50%; /* Establece el punto de referencia en el centro horizontal */
+    transform: translateX(-50%); /* Corrige la mitad del ancho del elemento */
+    z-index: 2;
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    width: 100%; /* Asegura que el menú ocupe toda la anchura de la página */
+}
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: flex; /* Usa flexbox */
+}
+#menu ul li {
+    display: inline-block;
+    margin: 0 0px; /* Añade un espacio entre los elementos del menú */
+}
+#menu ul li a{
+    color: rgb(255, 255, 255);
+    text-shadow: 
+        -1px -2px 0 rgb(0, 0, 0),  
+         1px -2px 0 rgb(0, 0, 0),
+        -1px  2px 0 rgb(0, 0, 0),
+         1px  2px 0 rgb(0, 0, 0); 
+    display: block;
+    text-decoration: none;
+    padding: 15px 20px;
+    /*padding: 15px 78.6px;*/
+}
+#menu ul li a:hover{
+    background-color: #202124;
+}
+#menu ul li a.phomea {
+    width: 48px; /* ajusta el ancho según sea necesario */
+    height: 48px; /* ajusta la altura según sea necesario */
+    padding: 5px 7px; /* ajusta el relleno según sea necesario */
+}
+#menu ul li a.phomea:hover img.phome {
+    filter: drop-shadow(0px 0px 5px rgb(165, 133, 255));   
+}
+/*  Buscador dentro del Nav */
+.search-box {
+    width: 300px; /* ajusta el ancho según sea necesario */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none; /* elimina el contorno al hacer clic */
+    margin-top: 3px; /* Ajusta este valor según tu diseño */
+}
+.search-box:focus {
+    border-color: #007bff; /* cambia el color del borde al enfocar */
+}
+.search-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.search-button:hover {
+    background-color: #0056b3; /* cambia el color al pasar el ratón */
+}
+.search-container {
+    
+    vertical-align: top;
+    margin-left: 20px; /* Ajusta este valor según sea necesario */
+}
+
+
+/*  Titulo  */
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+h2 {
+    text-align: center;
+    font-size: 55px;
+    margin-top: 80px;
+    margin-bottom: -30px;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    padding: 10px 0px;
+    text-shadow: 6px 6px 5px rgb(0, 0, 0);;
+}
+
+
+/*  Contador    */
+#contador-imagenes {
+    font-size: 18px;
+    color: #fff;
+    /* Agrega cualquier otro estilo que desees */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 6px 6px 5px rgb(0, 0, 0);
+    margin-top: 20px;
+    margin-bottom: -25px;
+    margin-left: 38%;
+    margin-right: 38%;
+    background-color: #000000;
+    filter: drop-shadow(1px 1px 2px rgb(107, 64, 224));  
+}
+
+
+/*  Menu desplegable para ordenar imagenes*/
+#menu2 {
+    font-family: Arial, sans-serif;
+    margin-left: 5.1%;
+    color: #fff;
+    text-shadow: 
+        -1px -2px 0 rgb(0, 0, 0),  
+         1px -2px 0 rgb(0, 0, 0),
+        -1px  2px 0 rgb(0, 0, 0),
+         1px  2px 0 rgb(0, 0, 0); 
+}
+#menu2 label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+#ordenar {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+#ordenar:hover {
+    border-color: #999;
+}
+#ordenar:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+#ordenar option {
+    background-color: #fff;
+    color: #333;
+}
+
+
+/*  Galeria de imagenes    */
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));/* Poner 200 si quiero que sean 5 en vez de 6 */
+    margin: 3%;/* Antes estaba en 5*/
+    grid-gap: 30px;
+    filter: drop-shadow(6px 6px 5px rgb(107, 64, 224));
+    position: relative;
+}
+.gallery img{
+    max-width: 300px; /* Ancho máximo igual al ancho del contenedor */
+    width: 100%;
+    height: auto;
+    transition: all 300ms;
+    position: relative;
+    display: flex;
+    border: 1px solid black; /* Grosor del borde y color negro */
+}
+.gallery img:hover{
+    transform: scale(1.11);
+}
+.nolotengo {
+    filter: grayscale(100%);
+}
+
+
+/*  Modal    */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Usamos solo un valor para background-color */
+}
+.modal-content {
+    background-color: #202124;
+    margin: 8% auto;
+    border: 1px solid #ffffff;
+    width: 55%; /* Reducimos el ancho para que haya más espacio para las imágenes */
+    height: 80%;
+}
+/* Sector de Imagen*/
+.image-container { 
+    width: 24.2vw; 
+    height: 79.5vh; 
+    position: relative; 
+    justify-content: left; 
+    align-items: center;
+    display: flex; 
+    box-sizing: border-box; /* Agregamos esto para que el padding se tenga en cuenta en el ancho total */ 
+    overflow: hidden; /* Ocultamos cualquier contenido adicional que pueda sobresalir del contenedor */ 
+    float: left; /* Alineamos el contenedor a la izquierda */
+}
+#modal-image {
+    height: auto;
+    width: auto;
+    max-width: 500px;
+    max-height: 550px;
+}
+/*Sector Texto*/
+.content-container {
+    width: 26vw; 
+    height: 67vh; 
+    box-sizing: border-box; /* Agregamos esto para que el padding se tenga en cuenta en el ancho total */ 
+    overflow: hidden; /* Ocultamos cualquier contenido adicional que pueda sobresalir del contenedor */ 
+    float: left; /* Alineamos el contenedor a la izquierda */
+    margin-left: 3%;
+}
+#modal-text{
+    color: #fff;
+    text-shadow: 
+        -1px -2px 0 rgb(0, 0, 0),  
+         1px -2px 0 rgb(0, 0, 0),
+        -1px  2px 0 rgb(0, 0, 0),
+         1px  2px 0 rgb(0, 0, 0); 
+    white-space: nowrap; /* Evitar que el texto se divida en múltiples líneas */
+    overflow: hidden; /* Ocultar el texto que desborda el contenedor */
+    text-overflow: ellipsis; /* Agregar puntos suspensivos (...) al final del texto que desborda el contenedor */
+    font-size: 2vw;
+    height: 100%;
+}
+/*Datos dentro del Texto*/
+.TittleGame {
+    margin: 0 auto; /* Centrar horizontalmente */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: min(4vw, 49px);
+}
+.Subtittle{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+.Datos{
+    display: flex;
+    justify-content: left; 
+    font-size: 15px;
+}
+.bloque{
+    margin-top: -10%;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    justify-content: space-between; /* Distribuye los elementos uniformemente en el contenedor */
+    margin-top: -3%; /* Espacio entre bloques */
+}
+.bloque2{
+    margin-top: 6%;
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos uniformemente en el contenedor */
+}
+.progress-container {
+    position: relative;
+    width: 97%;
+    height: 1%;
+    float: right;
+    margin-right: 3%;
+    margin-top: -2%;
+    display: block;
+}
+.progress-container .skill .progress {
+    position: relative;
+    width: 100%;
+    height: 9px;
+    background-color: #999;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.progress-container .skill .progress::before {
+    content: '';
+    position: absolute;
+    width: var(--wth);
+    height: 100%;
+    background-color: #00b3ff;
+}
+.progress-container3 {
+    position: relative;
+    width: 97%;
+    height: 1%;
+    float: right;
+    margin-right: 3%;
+    margin-top: -2%;
+    display: block;
+}
+.progress-container3 .skill3 .progress3 {
+    position: relative;
+    width: 100%;
+    height: 9px;
+    background-color: #999;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.progress-container3 .skill3 .progress3::before {
+    content: '';
+    position: absolute;
+    width: var(--wth);
+    height: 100%;
+    background-color: #f55656;
+}
+/*Cierre de Modal*/
+.close {
+    color: #ffffff;
+    float: right;
+    font-size: 60px;
+    font-weight: bold;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+.close:hover{
+    color: rgb(0, 0, 0);
+    text-shadow: 
+        -1px -1px 0 rgb(255, 255, 255),  
+         1px -1px 0 rgb(255, 255, 255),
+        -1px  1px 0 rgb(255, 255, 255),
+         1px  1px 0 rgb(255, 255, 255); 
+}
