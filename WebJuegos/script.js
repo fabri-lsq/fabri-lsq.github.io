@@ -35,7 +35,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
     var nombresMostrados = new Set();
     var plataformasJuegos = {};
     var csv = "Juegos.csv"; // CSV fijo
-
+    localStorage.setItem('ruta', ruta);
     // Parsear el archivo CSV
     Papa.parse(csv, {
         download: true,
@@ -44,10 +44,22 @@ function mostrarImagenesPorRuta(ruta, orden) {
             // Ordenar los resultados en función del parámetro 'orden'
             if (orden === 'nombre') {
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
+                localStorage.setItem('nombre', 'true');
+                localStorage.setItem('horas', 'false');
+                localStorage.setItem('logros', 'false');
+                localStorage.setItem(ruta, 'nombre');
             } else if (orden === 'horas') {
                 results.data.sort((a, b) => b.Horas - a.Horas);
+                localStorage.setItem('horas', 'true');
+                localStorage.setItem('nombre', 'false');
+                localStorage.setItem('logros', 'false');
+                localStorage.setItem(ruta, 'horas');
             } else if (orden === 'logros') {
                 results.data.sort((a, b) => b.PromedioLogros - a.PromedioLogros);
+                localStorage.setItem('logros', 'true');
+                localStorage.setItem('nombre', 'false');
+                localStorage.setItem('horas', 'false');
+                localStorage.setItem(ruta, 'logros');
             }
 
             // Iterar sobre cada fila del CSV
@@ -57,7 +69,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                     return;
                 } else {
                     // Verificar si la ruta coincide o si se deben mostrar todas las imágenes
-                    if (row.Ruta === ruta || ruta === "all") {
+                    if (row.Ruta === ruta || ruta === "index/") {
                         // Verificar si el nombre no ha sido mostrado antes
                         if (!nombresMostrados.has(row.Nombre)) {
                             // Agregar el nombre al conjunto de nombres mostrados
@@ -193,7 +205,6 @@ function mostrarImagenesPorRuta(ruta, orden) {
 function centrarImagenesGaleria() {
     var galeria = document.querySelector('.gallery');
     var imagenes = galeria.querySelectorAll('img');
-    var divs = galeria.querySelectorAll('div');
     var cantidadImagenes = imagenes.length;
 
     // Ajustar la distribución de las imágenes
@@ -201,10 +212,9 @@ function centrarImagenesGaleria() {
     galeria.style.flexWrap = 'wrap';
     galeria.style.justifyContent = 'center';
     galeria.style.alignItems = 'center';
-
     // Ajustar el margen entre las imágenes
     imagenes.forEach(function(img) {
-        img.style.margin = '10px';
+        img.style.maxWidth = '250px'; // Cambiar el ancho máximo
     });
 }
  //Función para mostrar la cantidad de imágenes en la galería
@@ -217,10 +227,14 @@ function mostrarCantidadImagenes() {
 function restaurarPropiedadesCSS() {
     // Restaurar las propiedades CSS originales de la galería
     var galeria = document.querySelector('.gallery');
+    var imagenes = galeria.querySelectorAll('img');
     galeria.style.display = "grid";
     galeria.style.flexWrap = "nowrap" ;
     galeria.style.justifyContent = "stretch";
     galeria.style.alignItems = "stretch";
+    imagenes.forEach(function(img) {
+        img.style.maxWidth = '300px'; // Cambiar el ancho máximo
+    });
 }
 function abrirModal(imagenSrc, texto) {
     var modal = document.getElementById('modal');
@@ -246,6 +260,65 @@ function abrirBlank(referencia) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Obtener la ruta de la página actual
+    var rutaActual = obtenerRutaActual();
+
+    // Inicializar localStorage si no está configurado
+    if (!localStorage.getItem('nombre') && !localStorage.getItem('horas') && !localStorage.getItem('logros')) {
+        localStorage.setItem('nombre', 'true');
+        localStorage.setItem('horas', 'false');
+        localStorage.setItem('logros', 'false');
+        localStorage.setItem('index/', 'nombre');
+        localStorage.setItem('steam/', 'nombre');
+        localStorage.setItem('xbox/', 'nombre');
+        localStorage.setItem('epicgames/', 'nombre');
+        localStorage.setItem('ubisoft/', 'nombre');
+    }
+
+
+    // Seleccionar la opción correspondiente al criterio actual
+    var selectOrdenar = document.getElementById("ordenar");
+    
+
+
+    // Comprobar el estado de localStorage y mostrar las imágenes según el criterio guardado
+    if(localStorage.getItem(rutaActual) === 'nombre'){
+        localStorage.setItem('nombre', 'true');
+        if (localStorage.getItem('nombre') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "nombre");
+            selectOrdenar.value = "nombre";
+        } else if (localStorage.getItem('horas') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "horas");
+            selectOrdenar.value = "horas";
+        } else if (localStorage.getItem('logros') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "logros");
+            selectOrdenar.value = "logros";
+        }
+    } else if(localStorage.getItem(rutaActual) === 'horas'){
+        localStorage.setItem('horas', 'true');
+        if (localStorage.getItem('nombre') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "nombre");
+            selectOrdenar.value = "nombre";
+        } else if (localStorage.getItem('horas') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "horas");
+            selectOrdenar.value = "horas";
+        } else if (localStorage.getItem('logros') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "logros");
+            selectOrdenar.value = "logros";
+        }
+    } else if(localStorage.getItem(rutaActual) === 'logros'){
+        localStorage.setItem('logros', 'true');
+        if (localStorage.getItem('nombre') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "nombre");
+            selectOrdenar.value = "nombre";
+        } else if (localStorage.getItem('horas') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "horas");
+            selectOrdenar.value = "horas";
+        } else if (localStorage.getItem('logros') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "logros");
+            selectOrdenar.value = "logros";
+        }
+    }
     // Agregar evento de clic al fondo del modal para cerrarlo si se hace clic fuera del contenido del modal
     var modal = document.getElementById('modal');
     modal.addEventListener('click', function(event) {
@@ -268,6 +341,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Función para obtener la ruta actual de la página
+function obtenerRutaActual() {
+    var rutaCompleta = window.location.pathname;
+    var partesRuta = rutaCompleta.split('/');
+    var paginaActual = partesRuta[partesRuta.length - 1];
+    paginaActual = paginaActual.slice(0, -5) + "/";
+    paginaActual.toLocaleLowerCase();
+
+    // Aquí puedes realizar cualquier otro procesamiento necesario para obtener el filtro correcto
+    return paginaActual;
+}
 
 function ordenarImagenes(criterio, ruta) {
     // Seleccionar el contenedor de galería

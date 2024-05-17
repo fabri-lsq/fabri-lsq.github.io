@@ -30,7 +30,7 @@
     <!-- Menú desplegable para ordenar las imágenes -->
     <div id="menu2">
         <label for="ordenar">Ordenar por:</label>
-        <select id="ordenar" onchange="ordenarImagenes(this.value, 'Steam/')">
+        <select id="ordenar" onchange="ordenarImagenes(this.value, 'steam/')">
             <option value="nombre">Nombre</option>
             <option value="horas">Horas</option>
             <option value="logros">Logros</option>
@@ -60,8 +60,5 @@
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script>
-        mostrarImagenesPorRuta('Steam/', "nombre");
-    </script>
 </body>
 </html>

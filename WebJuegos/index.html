@@ -12,7 +12,16 @@
     <header>
         <nav id="menu"> <!-- El indice que aparece siempre -->
             <ul>
-                <li><a class="phomea" href="../index.html"><img class="phome" src="../Home1.png"></a></li>
+                <li class="dropdown">
+                    <a class="phomea" href="../index.html">
+                        <img class="phome" src="../Home1.png">
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="/WebJuegos/index.html">JUEGOS</a>
+                        <a href="/WebManga/index.html">MANGAS</a>
+                        <a href="https://drive.google.com/drive/folders/1mL0PuBIC0SfwaZeeE83MMsbbq6qNy44D?usp=sharing">UTN</a>
+                    </div>
+                </li>
                 <li><a class="pindex" href="index.html">Juegos</a></li>
                 <li><input type="text" id="buscador" class="search-box"  placeholder="Buscar..." oninput="filtrarImagenes()"></li>
                 <li><a class="psteam" href="steam.html">Steam</a></li>
@@ -22,6 +31,9 @@
             </ul>
         </nav>
     </header>
+</body>
+</html>
+
     <div class="flex-center">
         <h2>Juegos</h2>
     </div>
@@ -32,7 +44,7 @@
     <!-- Menú desplegable para ordenar las imágenes -->
     <div id="menu2">
         <label for="ordenar">Ordenar por:</label>
-        <select id="ordenar" onchange="ordenarImagenes(this.value, 'all')">
+        <select id="ordenar" onchange="ordenarImagenes(this.value, 'index/')">
             <option value="nombre">Nombre</option>
             <option value="horas">Horas</option>
             <option value="logros">Logros</option>
@@ -63,7 +75,7 @@
     <!-- JavaScript externo -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script>
-        mostrarImagenesPorRuta('all', "nombre");
+        
     </script>   
 </body>
 </html>

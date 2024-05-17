@@ -83,6 +83,33 @@ body{
 #menu ul li a.phomea:hover img.phome {
     filter: drop-shadow(0px 0px 5px rgb(165, 133, 255));   
 }
+/* Añadido para el menú desplegable */
+.dropdown {
+    position: relative;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(107, 64, 224);
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 13px;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+/* Mostrar el menú desplegable al pasar el ratón */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 
 /*  Buscador dentro del Nav */
