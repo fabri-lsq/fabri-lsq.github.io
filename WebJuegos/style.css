@@ -452,25 +452,49 @@ h2 {
 
 
 /* Responsive CSS */
-@media (max-width: 700px) {
-    #menu {
+@media (max-width: 500px) {
+    .menu-toggle {
         display: block;
+        position: absolute;
+        top: -10px;
+        background-color: rgb(107, 64, 224);
+        color: white;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        width: 100%;
     }
-    .search-box {
-        width: 250px;
+    .phomea {
+        position: absolute;
+        top: -30px;
+        right: 15px; /* Ajusta el margen derecho según sea necesario */
     }
     #menu ul {
         display: none; /* Initially hide the menu items */
         flex-direction: column;
+        width: 100%;
+        margin-top: 9%;
+        position: relative;
     }
     #menu ul.menu-items.active {
         display: flex; /* Show the menu items when the toggle is active */
+        
     }
     #menu ul li {
-        margin: 0;
+        margin: 10px 0;
+        
     }
-    #menu ul li a {
-        padding: 10px;
+    #menu ul li a,
+    #menu ul li input {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        
+    }
+    .search-box {
+        width: 250px;
     }
     h2 {
         font-size: 40px;
@@ -531,33 +555,8 @@ h2 {
         margin-right: 5%;
         margin-top: 5%;
     }
-    .menu-toggle {
-        display: block;
-        background-color: rgb(107, 64, 224);
-        color: white;
-        font-size: 24px;
-        border: none;
-        cursor: pointer;
-        padding: 10px 15px;
-        margin: 10px;
-    }
-    .menu-items {
+    #menu2 label{
         display: none;
-        flex-direction: column;
-        width: 100%;
     }
-    .menu-items.active {
-        display: flex;
-    }
-    #menu ul li {
-        display: block;
-        margin: 10px 0; /* Adjust spacing as needed */
-    }
-    #menu ul li a,
-    #menu ul li input {
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 15px 0;
-    }
+
 }

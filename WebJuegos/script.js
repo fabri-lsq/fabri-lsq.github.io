@@ -339,6 +339,16 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = "none";
         }
     });
+
+    // Agregar evento de navegación para cerrar el modal cuando el usuario utiliza el botón de retroceso del navegador móvil
+    window.addEventListener('popstate', function(event) {
+        // Verificar si el modal está abierto
+        var modal = document.getElementById("tuModalId"); // Reemplaza "tuModalId" con el ID real de tu modal
+        if (modal && modal.style.display !== "none") {
+            // Cierra el modal si está abierto
+            modal.style.display = "none";
+        }
+    });
 });
 
 // Función para obtener la ruta actual de la página
