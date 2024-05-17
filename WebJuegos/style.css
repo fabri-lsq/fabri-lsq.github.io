@@ -29,6 +29,7 @@ body{
     display: flex; /* Usa flexbox */
     justify-content: center; /* Centra los elementos horizontalmente */
     width: 100%; /* Asegura que el menú ocupe toda la anchura de la página */
+    align-items: center;
 }
 #menu ul {
     list-style: none;
@@ -83,34 +84,23 @@ body{
 #menu ul li a.phomea:hover img.phome {
     filter: drop-shadow(0px 0px 5px rgb(165, 133, 255));   
 }
-/* Añadido para el menú desplegable */
-.dropdown {
-    position: relative;
-}
-.dropdown-content {
+/* Default styles */
+.menu-toggle {
     display: none;
-    position: absolute;
     background-color: rgb(107, 64, 224);
-    min-width: 90px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 10px;
 }
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    font-size: 13px;
+.menu-items {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-/* Mostrar el menú desplegable al pasar el ratón */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
 
 /*  Buscador dentro del Nav */
 .search-box {
@@ -458,4 +448,116 @@ h2 {
          1px -1px 0 rgb(255, 255, 255),
         -1px  1px 0 rgb(255, 255, 255),
          1px  1px 0 rgb(255, 255, 255); 
+}
+
+
+/* Responsive CSS */
+@media (max-width: 700px) {
+    #menu {
+        display: block;
+    }
+    .search-box {
+        width: 250px;
+    }
+    #menu ul {
+        display: none; /* Initially hide the menu items */
+        flex-direction: column;
+    }
+    #menu ul.menu-items.active {
+        display: flex; /* Show the menu items when the toggle is active */
+    }
+    #menu ul li {
+        margin: 0;
+    }
+    #menu ul li a {
+        padding: 10px;
+    }
+    h2 {
+        font-size: 40px;
+        margin-top: 60px;
+    }
+    #menu2 {
+        margin-left: 10px;
+        font-size: 14px;
+    }
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        grid-gap: 20px;
+    }
+    .img-horas {
+        font-size: 7vh;
+    }
+    .modal-content {
+        width: 90%;
+        height: auto;
+        margin: 15% auto;
+    }
+    .image-container {
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        float: none;
+    }
+    #modal-image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .content-container {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        float: none;
+        padding: 10px;
+    }
+    #modal-text {
+        white-space: normal; /* Allow text to wrap */
+        font-size: 4vw; /* Adjust font size */
+    }
+    .TittleGame {
+        font-size: min(6vw, 30px); /* Adjust font size */
+    }
+    .Subtittle {
+        font-size: 4vw; /* Adjust font size */
+    }
+    .Datos {
+        font-size: 3vw; /* Adjust font size */
+    }
+    .progress-container {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .close {
+        font-size: 40px; /* Reduce font size */
+        margin-right: 5%;
+        margin-top: 5%;
+    }
+    .menu-toggle {
+        display: block;
+        background-color: rgb(107, 64, 224);
+        color: white;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        margin: 10px;
+    }
+    .menu-items {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    .menu-items.active {
+        display: flex;
+    }
+    #menu ul li {
+        display: block;
+        margin: 10px 0; /* Adjust spacing as needed */
+    }
+    #menu ul li a,
+    #menu ul li input {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+    }
 }

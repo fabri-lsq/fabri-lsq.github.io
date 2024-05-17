@@ -6,22 +6,14 @@
     <title>Juegos</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="game.ico">
-    <script src="script.js"></script>    
+    <script src="script.js" defer></script>    
 </head>
 <body>
     <header>
         <nav id="menu"> <!-- El indice que aparece siempre -->
-            <ul>
-                <li class="dropdown">
-                    <a class="phomea" href="../index.html">
-                        <img class="phome" src="../Home1.png">
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="/WebJuegos/index.html">JUEGOS</a>
-                        <a href="/WebManga/index.html">MANGAS</a>
-                        <a href="https://drive.google.com/drive/folders/1mL0PuBIC0SfwaZeeE83MMsbbq6qNy44D?usp=sharing">UTN</a>
-                    </div>
-                </li>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="menu-items">
+                <li><a class="phomea" href="../index.html"><img class="phome" src="../Home1.png"></a></li>
                 <li><a class="pindex" href="index.html">Juegos</a></li>
                 <li><input type="text" id="buscador" class="search-box"  placeholder="Buscar..." oninput="filtrarImagenes()"></li>
                 <li><a class="psteam" href="steam.html">Steam</a></li>
@@ -31,6 +23,7 @@
             </ul>
         </nav>
     </header>
+    
 </body>
 </html>
 
