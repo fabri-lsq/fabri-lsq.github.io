@@ -554,6 +554,7 @@ h2 {
         font-size: 40px; /* Reduce font size */
         margin-right: 5%;
         margin-top: 5%;
+        display: none;
     }
     #menu2 label{
         display: none;
