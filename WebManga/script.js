@@ -1,17 +1,13 @@
 function filtrarImagenes() {
-
     // Verificar si el modal está abierto y cerrarlo si es así
     var modal = document.getElementById('modal');
     if (modal.style.display === "block") {
         modal.style.display = "none";
     }
-
     // Obtener el valor del campo de búsqueda
     var textoBusqueda = document.getElementById('buscador').value.toLowerCase();
-    
     // Obtener todas las imágenes
     var imagenes = document.querySelectorAll('.gallery img');
-    
     // Iterar sobre cada imagen y mostrar u ocultar según el texto de búsqueda
     imagenes.forEach(function(imagen) {
         var alt = imagen.getAttribute('alt').toLowerCase();
@@ -20,8 +16,7 @@ function filtrarImagenes() {
         } else {
             imagen.style.display = 'none'; // Ocultar la imagen
         }
-    });
-
+    })
     // Si el campo de búsqueda está vacío, restaurar las propiedades CSS originales
     if (textoBusqueda === "") {
         restaurarPropiedadesCSS();
@@ -47,7 +42,7 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
             if (orden === 'nombre') {
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
             } else if(orden === 'nombre2'){
-                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? -1 : 1);
+                results.data.sort((a, b) => (b.Nombre > a.Nombre) ? 1 : -1);
             } else if (orden === 'tenencia') {
                 results.data.sort((a, b) => {
                     if (a.LoTengo === b.LoTengo) {
@@ -58,7 +53,7 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
                         return 1;
                     }
                 });
-            }   else if (orden === '01') {
+            } else if (orden === '01') {
                 // Filtrar los resultados que contienen "01" en el nombre
                 let filteredResults = results.data.filter(item => item.Nombre.includes('01'));
                 // Ordenar los resultados filtrados por nombre
@@ -79,6 +74,18 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
             } else if (orden === 'nolotengoZ-A') {
                 // Filtrar los resultados que tienen "No" en LoTengo
                 let filteredResults = results.data.filter(item => item.LoTengo === 'No');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? -1 : 1);
+            } else if (orden === 'siguiendo') {
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.Siguiendo === 'Si');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
+            } else if (orden === 'siguiendo2') {
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.Siguiendo === 'Si');
                 // Actualizar los resultados con los resultados filtrados
                 results.data = filteredResults;
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? -1 : 1);
@@ -228,7 +235,6 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
 function centrarImagenesGaleria() {
     var galeria = document.querySelector('.gallery');
     var imagenes = galeria.querySelectorAll('img');
-    var divs = galeria.querySelectorAll('div');
     var cantidadImagenes = imagenes.length;
 
     // Ajustar la distribución de las imágenes
@@ -239,7 +245,7 @@ function centrarImagenesGaleria() {
 
     // Ajustar el margen entre las imágenes
     imagenes.forEach(function(img) {
-        img.style.margin = '10px';
+        img.style.maxWidth = '200px'; // Cambiar el ancho máximo
     });
 }
 
@@ -281,6 +287,10 @@ function ordenarImagenes(ruta, criterio, mostrar) {
         mostrarImagenesPorRuta(ruta, "nolotengoZ-A", mostrar);
     } else if(criterio== "tenencia"){
         mostrarImagenesPorRuta(ruta, "tenencia", mostrar);
+    } else if(criterio== "siguiendo"){
+        mostrarImagenesPorRuta(ruta, "siguiendo", mostrar);
+    } else if(criterio== "siguiendo2"){
+        mostrarImagenesPorRuta(ruta, "siguiendo2", mostrar);
     } 
 }
 
@@ -288,10 +298,14 @@ function ordenarImagenes(ruta, criterio, mostrar) {
 function restaurarPropiedadesCSS() {
     // Restaurar las propiedades CSS originales de la galería
     var galeria = document.querySelector('.gallery');
+    var imagenes = galeria.querySelectorAll('img');
     galeria.style.display = "grid";
     galeria.style.flexWrap = "nowrap" ;
     galeria.style.justifyContent = "stretch";
     galeria.style.alignItems = "stretch";
+    imagenes.forEach(function(img) {
+        img.style.maxWidth = '300px'; // Cambiar el ancho máximo
+    });
 }
 
 function abrirModal(imagenSrc, texto) {
@@ -346,4 +360,8 @@ function updateProgressBar(percentage) {
   percentage = Math.min(100, Math.max(0, percentage));
   // Establecer el ancho de la barra de progreso
   progressBar.style.width = percentage + "%";
+}
+function toggleMenu() {
+    const menuItems = document.querySelector('.menu-items');
+    menuItems.classList.toggle('active');
 }

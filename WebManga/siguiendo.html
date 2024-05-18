@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mangas</title>
+    <title>Siguiendo</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="Solazo.ico">
     <script src="script.js"></script>    
@@ -24,18 +24,17 @@
         </nav>
     </header>
     <div class="flex-center">
-        <h2>Mangas</h2>
+        <h2>Siguiendo</h2>
     </div>
 
-    <div id="contador-imagenes"></div>
+    <div id="contador-imagenes" ></div>
 
     <!-- Menú desplegable para ordenar las imágenes -->
     <div id="menu2">
         <label for="ordenar">Ordenar por:</label>
         <select id="ordenar" onchange="ordenarImagenes('all', this.value, 'no')">
-            <option value="nombre">Nombre ↓</option>
-            <option value="nombre2">Nombre ↑</option>
-            <option value="lotengo">LoTengo</option>
+            <option value="siguiendo">Nombre ↓</option>
+            <option value="siguiendo2">Nombre ↑</option>
         </select>
     </div>
 
@@ -62,7 +61,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script>
-        mostrarImagenesPorRuta('all',"nombre","si");
+        mostrarImagenesPorRuta('all', "siguiendo","si");
     </script>
 </body>
 </html>

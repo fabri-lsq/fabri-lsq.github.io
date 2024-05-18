@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tomos Unicos</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="lightbox.css">
     <link rel="icon" href="Solazo.ico">
     <script src="script.js"></script>    
 </head>
@@ -13,18 +12,20 @@
    
     <header>
         <nav id="menu"> <!-- El indice que aparece siempre -->
-            <ul>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="menu-items">
                 <li><a class="phomea" href="../index.html"><img class="phome" src="../Home1.png"></a></li>
                 <li><a href="index.html">Mangas</a></li>
                 <li><input type="text" id="buscador" class="search-box"  placeholder="Buscar..." oninput="filtrarImagenes()"></li>
                 <li><a href="tomosunicos.html">TomosUnicos</a></li>
+                <li><a href="siguiendo.html">Siguiendo</a></li>
                 <li><a href="faltan.html">Faltan</a></li>
                 <li><a href="alternativas.html">Alternativas</a></li>
             </ul>
         </nav>
     </header>
     <div class="flex-center">
-        <h2 style="margin-top: 6.5%;">Tomos Unicos</h2>
+        <h2>Tomos Unicos</h2>
     </div>
 
     <!-- Menú desplegable para ordenar las imágenes -->
