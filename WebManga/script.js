@@ -105,7 +105,7 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
 
                                 // Crear la ruta de la imagen
                                 var rutaImagen = row.Ruta + row.Nombre + row.Extension;
-
+                                rutaImagen = rutaImagen.toLowerCase();
                                 //Contador de cuantos tengo
                                 if (index + 1 < results.data.length) {
                                     var nextElement = results.data[index + 1];
