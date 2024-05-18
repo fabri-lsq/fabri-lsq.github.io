@@ -11,7 +11,8 @@
 <body id="steam">
     <header>
         <nav id="menu"> <!-- El indice que aparece siempre -->
-            <ul>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="menu-items">
                 <li><a class="phomea" href="../index.html"><img class="phome" src="../Home1.png"></a></li>
                 <li><a class="pindex" href="index.html">Juegos</a></li>
                 <li><input type="text" id="buscador" class="search-box"  placeholder="Buscar..." oninput="filtrarImagenes()"></li>

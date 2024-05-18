@@ -10,18 +10,18 @@
 </head>
 <body id="xbox">
     <header>
-            <nav id="menu"> <!-- El indice que aparece siempre -->
-                <ul>
-                    <li><a class="phomea" href="../index.html"><img class="phome" src="../Home1.png"></a></li>
-                    <li><a class="pindex" href="index.html">Juegos</a></li>
-                    <li><input type="text" id="buscador" class="search-box"  placeholder="Buscar..." oninput="filtrarImagenes()"></li>
-                    <li><a class="psteam" href="steam.html">Steam</a></li>
-                    <li><a class="pxbox" href="xbox.html">Xbox</a></li>
-                    <li><a class="pepicgames" href="epicgames.html">EpicGames</a></li>
-                    <li><a class="pubisoft" href="ubisoft.html">Ubisoft</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav id="menu"> <!-- El indice que aparece siempre -->
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="menu-items">
+                <li><a class="phomea" href="../index.html"><img class="phome" src="../Home1.png"></a></li>
+                <li><a class="pindex" href="index.html">Juegos</a></li>
+                <li><input type="text" id="buscador" class="search-box"  placeholder="Buscar..." oninput="filtrarImagenes()"></li>
+                <li><a class="psteam" href="steam.html">Steam</a></li>
+                <li><a class="pxbox" href="xbox.html">Xbox</a></li>
+                <li><a class="pepicgames" href="epicgames.html">EpicGames</a></li>
+                <li><a class="pubisoft" href="ubisoft.html">Ubisoft</a></li>
+            </ul>
+        </nav>
     </header>
     <div class="flex-center">
         <h2>Xbox</h2>

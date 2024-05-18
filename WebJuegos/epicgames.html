@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubisoft</title>
+    <title>EpicGames</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lightbox.css">
-    <link rel="icon" href="Ubisoft/ubisoft-copia.ico">
-    <script src="script.js"></script>      
+    <link rel="icon" href="EpicGames/epic.ico">
+    <script src="script.js"></script>    
 </head>
-<body id="xbox">
+<body id="epic">
     <header>
         <nav id="menu"> <!-- El indice que aparece siempre -->
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -24,23 +24,27 @@
             </ul>
         </nav>
     </header>
-    <h2>Ubisoft</h2>
+    <div class="flex-center">
+        <h2>EpicGames</h2>
+    </div>
+
     <div id="contador-imagenes"></div>
 
-<!-- Menú desplegable para ordenar las imágenes -->
+    <!-- Menú desplegable para ordenar las imágenes -->
     <div id="menu2">
         <label for="ordenar">Ordenar por:</label>
-        <select id="ordenar" onchange="ordenarImagenes(this.value, 'ubisoft/')">
+        <select id="ordenar" onchange="ordenarImagenes(this.value, 'epicgames/')">
             <option value="nombre">Nombre</option>
             <option value="horas">Horas</option>
             <option value="logros">Logros</option>
         </select>
     </div>
-    
+
     <div class="container">
         <div class="gallery">
         </div>
     </div>
+
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
@@ -55,7 +59,6 @@
         </div>
     </div>
 
-    <script src="lightbox-plus-jquery.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </body>
 </html>
