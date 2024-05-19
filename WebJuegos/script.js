@@ -19,7 +19,9 @@ function filtrarImagenes() {
         var logros = contenedor.querySelector('.img-horas2');
         var progreso = contenedor.querySelector('.progress-container2');
         
-        if (alt.includes(textoBusqueda)) {
+        var name = alt.replace(/([A-Z])/g, ' $1').trim();
+
+        if (name.includes(textoBusqueda)) {
             contenedor.style.display = 'block'; // Mostrar el contenedor de la imagen
             if (horas) horas.style.display = 'flex'; // Mostrar las horas si existen
             if (logros) logros.style.display = 'flex'; // Mostrar los logros si existen
@@ -97,7 +99,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                             var img = document.createElement('img');
                             
                             img.src = rutaImagen;
-                            img.alt = row.Nombre; // Agregar alt para el buscador
+                            img.alt = row.Nombre.replace(/([A-Z0-9])/g, ' $1').trim(); // Agregar alt para el buscador, con espacios
                             var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
                             img.setAttribute('href', hrefe);
                             img.setAttribute('data-platform', row.Ruta); // Agregar atributo de datos para la plataforma
@@ -221,19 +223,28 @@ function centrarImagenesGaleria() {
     galeria.style.flexWrap = 'wrap';
     galeria.style.justifyContent = 'center';
     galeria.style.alignItems = 'center';
+    galeria.style.gridGap = '20px';
+    // Media query para detectar pantallas pequeñas
+    var isMobile = window.matchMedia("(max-width: 500px)").matches;
 
     // Ajustar el margen entre los contenedores de imágenes
     contenedores.forEach(function(contenedor) {
-        contenedor.style.margin = '0px 10px 320px 10px'; // Agregar margen entre los contenedores
-
+        var horas = contenedor.querySelector('.img-horas');
+        var logros = contenedor.querySelector('.img-horas2');
+        if (isMobile) {
+            if (logros) contenedor.style.margin = '0px 0px 80% 0px'; // Margen para móvil
+            if (horas) contenedor.style.margin = '0px 0px 70% 0px'; // Margen para móvil
+        } else {
+            contenedor.style.margin = '0px 10px 320px 10px'; // Margen para pantallas grandes
+        }
         var img = contenedor.querySelector('img');
         if (img) img.style.maxWidth = '200px'; // Ajustar el tamaño máximo de las imágenes
 
-        var horas = contenedor.querySelector('.img-horas');
+        
         if (horas) horas.style.maxWidth = '250px'; // Ajustar el tamaño máximo de las horas
         if (horas) horas.style.margin = '-95% 20%'; // Ajustar el tamaño máximo de los logros
 
-        var logros = contenedor.querySelector('.img-horas2');
+        
         if (logros) logros.style.maxWidth = '250px'; // Ajustar el tamaño máximo de los logros
         if (logros) logros.style.margin = '-110% 20%'; // Ajustar el tamaño máximo de los logros
         
@@ -416,7 +427,7 @@ function obtenerRutaActual() {
 function ordenarImagenes(criterio, ruta) {
     // Seleccionar el contenedor de galería
     var contenedorGaleria = document.querySelector('.gallery');
-
+    restaurarPropiedadesCSS();
     // Eliminar todas las imágenes existentes
     while (contenedorGaleria.firstChild) {
         contenedorGaleria.removeChild(contenedorGaleria.firstChild);
