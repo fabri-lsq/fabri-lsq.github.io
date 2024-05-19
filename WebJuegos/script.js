@@ -100,7 +100,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                             
                             img.src = rutaImagen;
                             img.setAttribute('juego', row.Nombre);
-                            img.alt = row.Nombre.replace(/([A-Z])/g, ' $1').replace(/(\d)([A-Z])/g, '$1 $2').trim();; // Agregar alt para el buscador, con espacios
+                            img.alt = row.Nombre.replace(/([A-Z])/g, ' $1').replace(/(\d)([A-Z])/g, '$1 $2').replace(/([A-Za-z])(\d)/g, '$1 $2').trim(); // Agregar alt para el buscador, con espacios
                             var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
                             img.setAttribute('href', hrefe);
                             img.setAttribute('data-platform', row.Ruta); // Agregar atributo de datos para la plataforma
