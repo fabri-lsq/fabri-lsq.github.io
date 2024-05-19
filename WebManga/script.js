@@ -145,7 +145,7 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
                                     var contenedor = document.querySelector('.gallery');
                                     var img = document.createElement('img');
                                     img.src = rutaImagen;
-                                    img.alt = dataActual; // Agregar alt para el buscador
+                                    img.alt = row.Nombre; // Agregar alt para el buscador
                                     var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
                                     img.setAttribute('href', hrefe);
                                     img.setAttribute('data-tenencia', row.LoTengo); // Agregar atributo de datos para los logros
@@ -240,20 +240,25 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
 }
 // Función para centrar y distribuir equitativamente las imágenes en la galería
 function centrarImagenesGaleria() {
-    var galeria = document.querySelector('.gallery');
-    var imagenes = galeria.querySelectorAll('img');
-    var cantidadImagenes = imagenes.length;
-
-    // Ajustar la distribución de las imágenes
-    galeria.style.display = 'flex';
-    galeria.style.flexWrap = 'wrap';
-    galeria.style.justifyContent = 'center';
-    galeria.style.alignItems = 'center';
-
-    // Ajustar el margen entre las imágenes
-    imagenes.forEach(function(img) {
-        img.style.maxWidth = '200px'; // Cambiar el ancho máximo
-    });
+    // Media query para detectar pantallas pequeñas
+    var isMobile = window.matchMedia("(max-width: 500px)").matches;
+    if (isMobile) {    
+    } else {
+        var galeria = document.querySelector('.gallery');
+        var imagenes = galeria.querySelectorAll('img');
+        var cantidadImagenes = imagenes.length;
+    
+        // Ajustar la distribución de las imágenes
+        galeria.style.display = 'flex';
+        galeria.style.flexWrap = 'wrap';
+        galeria.style.justifyContent = 'center';
+        galeria.style.alignItems = 'center';
+    
+        // Ajustar el margen entre las imágenes
+        imagenes.forEach(function(img) {
+            img.style.maxWidth = '200px'; // Cambiar el ancho máximo
+        });
+    }
 }
 
 function mostrarCantidadImagenes() {
