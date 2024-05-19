@@ -231,16 +231,15 @@ function centrarImagenesGaleria() {
     contenedores.forEach(function(contenedor) {
         var horas = contenedor.querySelector('.img-horas');
         var logros = contenedor.querySelector('.img-horas2');
+        var img = contenedor.querySelector('img');
         if (isMobile) {
             if (logros) contenedor.style.margin = '0px 0px 80% 0px'; // Margen para móvil
             if (horas) contenedor.style.margin = '0px 0px 70% 0px'; // Margen para móvil
+            if (img) img.style.maxWidth = '190px'; // Ajustar el tamaño máximo de las imágenes
         } else {
             contenedor.style.margin = '0px 10px 320px 10px'; // Margen para pantallas grandes
+            if (img) img.style.maxWidth = '200px'; // Ajustar el tamaño máximo de las imágenes
         }
-        var img = contenedor.querySelector('img');
-        if (img) img.style.maxWidth = '200px'; // Ajustar el tamaño máximo de las imágenes
-
-        
         if (horas) horas.style.maxWidth = '250px'; // Ajustar el tamaño máximo de las horas
         if (horas) horas.style.margin = '-95% 20%'; // Ajustar el tamaño máximo de los logros
 
@@ -427,7 +426,9 @@ function obtenerRutaActual() {
 function ordenarImagenes(criterio, ruta) {
     // Seleccionar el contenedor de galería
     var contenedorGaleria = document.querySelector('.gallery');
+    var buscador = document.querySelector('.search-box');
     restaurarPropiedadesCSS();
+    buscador.value = "";
     // Eliminar todas las imágenes existentes
     while (contenedorGaleria.firstChild) {
         contenedorGaleria.removeChild(contenedorGaleria.firstChild);
