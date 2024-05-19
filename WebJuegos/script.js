@@ -100,7 +100,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                             
                             img.src = rutaImagen;
                             img.setAttribute('juego', row.Nombre);
-                            img.alt = row.Nombre.replace(/([A-Z0-9])/g, ' $1').trim(); // Agregar alt para el buscador, con espacios
+                            img.alt = row.Nombre.replace(/([A-Z])/g, ' $1').replace(/(\d)([A-Z])/g, '$1 $2').trim();; // Agregar alt para el buscador, con espacios
                             var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
                             img.setAttribute('href', hrefe);
                             img.setAttribute('data-platform', row.Ruta); // Agregar atributo de datos para la plataforma
@@ -235,10 +235,10 @@ function centrarImagenesGaleria() {
         // Ajustar el margen entre los contenedores de imágenes
         contenedores.forEach(function(contenedor) {
 
-            contenedor.style.margin = '0px 10px 320px 10px'; // Margen para pantallas grandes
+            contenedor.style.margin = '0px 1px 1% 10px'; // Margen para pantallas grandes
 
             var img = contenedor.querySelector('img');
-            if (img) img.style.maxWidth = '200px'; // Ajustar el tamaño máximo de las imágenes
+            if (img) img.style.maxWidth = '207px'; // Ajustar el tamaño máximo de las imágenes
 
             var horas = contenedor.querySelector('.img-horas');
             if (horas) horas.style.maxWidth = '250px'; // Ajustar el tamaño máximo de las horas
