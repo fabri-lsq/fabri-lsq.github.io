@@ -220,6 +220,7 @@ h2 {
     position: relative;
     display: flex;
     border: 1px solid black; /* Grosor del borde y color negro */
+    max-width: fit-content;
 }
 .gallery img:hover{
     transform: scale(1.11);
@@ -228,6 +229,7 @@ h2 {
 .imagen-contenedor {
     transition: all 300ms;
     height: 83.6%;
+    
 }
 .imagen-contenedor:hover .progress2 {
     transform: scale(1.12);
@@ -263,6 +265,7 @@ h2 {
     transition: all 300ms;
     z-index: 1;
     pointer-events: none; /*Elimina hitbox*/
+    
 }
 /*  Logros    */
 .progress-container2 {
@@ -274,6 +277,7 @@ h2 {
     align-items: flex-end;
     filter: drop-shadow(4px 4px 5px rgb(0, 0, 0));
     pointer-events: none;
+    
 }
 .progress-container2 .skill2 .progress2 {
     position: relative;
@@ -283,6 +287,7 @@ h2 {
     border-radius: 6px;
     overflow: hidden;
     pointer-events: none;
+    
 }
 .progress-container2 .skill2 .progress2::before {
     content: '';
@@ -290,9 +295,11 @@ h2 {
     width: var(--wth);
     height: 100%;
     background-color: #57df5c;
+    
 }
 .progress2 {
     transition: all 300ms;
+    
 }
 /*CODIGO AL PEDO PERO NO QUIERO ARREGLAR EL PROBLEMA*/
 .percentage-text {
@@ -305,11 +312,12 @@ h2 {
     position: relative; /* Agrega esta línea */
     top: -21px; /* Ajusta el valor según necesites */
     z-index: -1;
+    
 }/*CODIGO AL PEDO PERO NO QUIERO ARREGLAR EL PROBLEMA*/
 .img-horas2 {
     position: relative; /* Agrega esta línea */
     height: 80%;
-    top: -193.5%;
+    top: -199%;
     font-size: 9vh;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 800;
@@ -327,6 +335,7 @@ h2 {
     transition: all 300ms;
     z-index: 1;
     pointer-events: none;
+    
 }
 
 
@@ -509,7 +518,10 @@ h2 {
         grid-gap: 20px;
     }
     .img-horas {
-        font-size: 7vh;
+        font-size: 6vh;
+    }
+    .img-horas2 {
+        font-size: 6vh;
     }
     .modal-content {
         width: 90%;

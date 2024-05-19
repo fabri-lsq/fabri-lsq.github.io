@@ -1,5 +1,4 @@
 function filtrarImagenes() {
-
     // Verificar si el modal está abierto y cerrarlo si es así
     var modal = document.getElementById('modal');
     if (modal.style.display === "block") {
@@ -10,15 +9,26 @@ function filtrarImagenes() {
     var textoBusqueda = document.getElementById('buscador').value.toLowerCase();
     
     // Obtener todas las imágenes
-    var imagenes = document.querySelectorAll('.gallery img');
+    var imagenes = document.querySelectorAll('.gallery .imagen-contenedor');
     
-    // Iterar sobre cada imagen y mostrar u ocultar según el texto de búsqueda
-    imagenes.forEach(function(imagen) {
+    // Iterar sobre cada contenedor de imagen y mostrar u ocultar según el texto de búsqueda
+    imagenes.forEach(function(contenedor) {
+        var imagen = contenedor.querySelector('img');
         var alt = imagen.getAttribute('alt').toLowerCase();
+        var horas = contenedor.querySelector('.img-horas');
+        var logros = contenedor.querySelector('.img-horas2');
+        var progreso = contenedor.querySelector('.progress-container2');
+        
         if (alt.includes(textoBusqueda)) {
-            imagen.style.display = 'block'; // Mostrar la imagen
+            contenedor.style.display = 'block'; // Mostrar el contenedor de la imagen
+            if (horas) horas.style.display = 'flex'; // Mostrar las horas si existen
+            if (logros) logros.style.display = 'flex'; // Mostrar los logros si existen
+            if (progreso) progreso.style.display = 'flex'; // Mostrar la barra de progreso si existe
         } else {
-            imagen.style.display = 'none'; // Ocultar la imagen
+            contenedor.style.display = 'none'; // Ocultar el contenedor de la imagen
+            if (horas) horas.style.display = 'none'; // Ocultar las horas si existen
+            if (logros) logros.style.display = 'none'; // Ocultar los logros si existen
+            if (progreso) progreso.style.display = 'none'; // Ocultar la barra de progreso si existe
         }
     });
 
@@ -30,6 +40,7 @@ function filtrarImagenes() {
         centrarImagenesGaleria();
     }
 }
+
 function mostrarImagenesPorRuta(ruta, orden) {
     // Crear un conjunto para almacenar los nombres de las imágenes mostradas
     var nombresMostrados = new Set();
@@ -84,17 +95,17 @@ function mostrarImagenesPorRuta(ruta, orden) {
 
                             // Crear la imagen
                             var img = document.createElement('img');
+                            
                             img.src = rutaImagen;
                             img.alt = row.Nombre; // Agregar alt para el buscador
                             var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
-                            img.setAttribute('class','imagen')
                             img.setAttribute('href', hrefe);
                             img.setAttribute('data-platform', row.Ruta); // Agregar atributo de datos para la plataforma
                             img.setAttribute('data-hours-played', row.Horas); // Agregar atributo de datos para las horas jugadas
                             img.setAttribute('data-achievements', row.MisLogros); // Agregar atributo de datos para los logros
                             img.setAttribute('data-total-achievements', row.LogrosTotal); 
                             img.setAttribute('data-promedio-achievements', row.PromedioLogros); 
-
+                            img.setAttribute('loading','lazy');
                             divContenedor.appendChild(img); // Agregar la imagen al div contenedor
 
                             if (orden === "horas") {
@@ -116,8 +127,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                                 logrosContainer.setAttribute('class', 'img-horas2');
                                 logrosContainer.textContent = row.PromedioLogros + "%"; // Texto con las horas
                             
-
-
+                                divContenedor.style.marginBottom = "-23%";
 
                                 // Crear contenedor de progreso
                                 var progressContainer = document.createElement('div');
@@ -155,7 +165,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                                 contenedor.appendChild(divContenedor);
                             } else {
                                 var contenedor = document.querySelector('.gallery');
-                                contenedor.appendChild(img);
+                                contenedor.appendChild(divContenedor);
                             }
                         } else {
                             plataformasJuegos[row.Nombre] += [row.Ruta];
@@ -204,37 +214,77 @@ function mostrarImagenesPorRuta(ruta, orden) {
 // Función para centrar y distribuir equitativamente las imágenes en la galería
 function centrarImagenesGaleria() {
     var galeria = document.querySelector('.gallery');
-    var imagenes = galeria.querySelectorAll('img');
-    var cantidadImagenes = imagenes.length;
+    var contenedores = galeria.querySelectorAll('.imagen-contenedor');
 
     // Ajustar la distribución de las imágenes
     galeria.style.display = 'flex';
     galeria.style.flexWrap = 'wrap';
     galeria.style.justifyContent = 'center';
     galeria.style.alignItems = 'center';
-    // Ajustar el margen entre las imágenes
-    imagenes.forEach(function(img) {
-        img.style.maxWidth = '250px'; // Cambiar el ancho máximo
+
+    // Ajustar el margen entre los contenedores de imágenes
+    contenedores.forEach(function(contenedor) {
+        contenedor.style.margin = '0px 10px 320px 10px'; // Agregar margen entre los contenedores
+
+        var img = contenedor.querySelector('img');
+        if (img) img.style.maxWidth = '200px'; // Ajustar el tamaño máximo de las imágenes
+
+        var horas = contenedor.querySelector('.img-horas');
+        if (horas) horas.style.maxWidth = '250px'; // Ajustar el tamaño máximo de las horas
+        if (horas) horas.style.margin = '-95% 20%'; // Ajustar el tamaño máximo de los logros
+
+        var logros = contenedor.querySelector('.img-horas2');
+        if (logros) logros.style.maxWidth = '250px'; // Ajustar el tamaño máximo de los logros
+        if (logros) logros.style.margin = '-110% 20%'; // Ajustar el tamaño máximo de los logros
+        
+        var progreso = contenedor.querySelector('.progress-container2');
+        if (progreso) progreso.style.maxWidth = '250px'; // Ajustar el tamaño máximo de la barra de progreso
     });
 }
- //Función para mostrar la cantidad de imágenes en la galería
-function mostrarCantidadImagenes() {
-    var cantidadImagenes = document.querySelectorAll('.gallery img').length;
-    var contador = document.getElementById('contador-imagenes');
-    contador.textContent = '' + cantidadImagenes;
-}
+
 // Función para restaurar las propiedades CSS originales de la galería
 function restaurarPropiedadesCSS() {
-    // Restaurar las propiedades CSS originales de la galería
     var galeria = document.querySelector('.gallery');
-    var imagenes = galeria.querySelectorAll('img');
-    galeria.style.display = "grid";
-    galeria.style.flexWrap = "nowrap" ;
-    galeria.style.justifyContent = "stretch";
-    galeria.style.alignItems = "stretch";
-    imagenes.forEach(function(img) {
-        img.style.maxWidth = '300px'; // Cambiar el ancho máximo
+    var contenedores = galeria.querySelectorAll('.imagen-contenedor');
+
+    // Restaurar las propiedades CSS originales de la galería
+    galeria.style.display = 'grid';
+    galeria.style.gridTemplateColumns = 'repeat(auto-fit, minmax(190px, 1fr))';
+    galeria.style.margin = '3%';
+    galeria.style.gridGap = '30px';
+    galeria.style.filter = 'drop-shadow(6px 6px 5px rgb(107, 64, 224))';
+    galeria.style.position = 'relative';
+    galeria.style.justifyContent = '';
+    galeria.style.alignItems = '';
+    galeria.style.flexWrap = '';
+
+    // Restaurar las propiedades CSS originales de los contenedores de imágenes
+    contenedores.forEach(function(contenedor) {
+        contenedor.style.margin = ''; 
+        
+
+        var img = contenedor.querySelector('img');
+        if (img) {img.style.maxWidth = 'fit-content';// Restaurar el tamaño máximo de las imágenes
+        }
+
+        var horas = contenedor.querySelector('.img-horas');
+        if (horas) horas.style.maxWidth = ''; // Restaurar el tamaño máximo de las horas
+        if (horas) horas.style.margin = ''; // Ajustar el tamaño máximo de los logros
+
+        var logros = contenedor.querySelector('.img-horas2');
+        if (logros) logros.style.maxWidth = ''; // Restaurar el tamaño máximo de los logros
+        if (logros) logros.style.margin = ''; // Ajustar el tamaño máximo de los logros
+        if (logros) contenedor.style.marginBottom = "-23%"; // Eliminar margen entre los contenedores
+
+        var progreso = contenedor.querySelector('.progress-container2');
+        if (progreso) progreso.style.maxWidth = ''; // Restaurar el tamaño máximo de la barra de progreso
     });
+}
+//Función para mostrar la cantidad de imágenes en la galería
+function mostrarCantidadImagenes() {
+   var cantidadImagenes = document.querySelectorAll('.gallery img').length;
+   var contador = document.getElementById('contador-imagenes');
+   contador.textContent = '' + cantidadImagenes;
 }
 function abrirModal(imagenSrc, texto) {
     var modal = document.getElementById('modal');
