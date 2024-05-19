@@ -215,41 +215,41 @@ function mostrarImagenesPorRuta(ruta, orden) {
 
 // Función para centrar y distribuir equitativamente las imágenes en la galería
 function centrarImagenesGaleria() {
-    var galeria = document.querySelector('.gallery');
-    var contenedores = galeria.querySelectorAll('.imagen-contenedor');
-
-    // Ajustar la distribución de las imágenes
-    galeria.style.display = 'flex';
-    galeria.style.flexWrap = 'wrap';
-    galeria.style.justifyContent = 'center';
-    galeria.style.alignItems = 'center';
-    galeria.style.gridGap = '20px';
     // Media query para detectar pantallas pequeñas
     var isMobile = window.matchMedia("(max-width: 500px)").matches;
+    if (isMobile) {
+    } else {
+        var galeria = document.querySelector('.gallery');
+        var contenedores = galeria.querySelectorAll('.imagen-contenedor');
 
-    // Ajustar el margen entre los contenedores de imágenes
-    contenedores.forEach(function(contenedor) {
-        var horas = contenedor.querySelector('.img-horas');
-        var logros = contenedor.querySelector('.img-horas2');
-        var img = contenedor.querySelector('img');
-        if (isMobile) {
-            if (logros) contenedor.style.margin = '0px 0px 80% 0px'; // Margen para móvil
-            if (horas) contenedor.style.margin = '0px 0px 70% 0px'; // Margen para móvil
-            if (img) img.style.maxWidth = '190px'; // Ajustar el tamaño máximo de las imágenes
-        } else {
+        // Ajustar la distribución de las imágenes
+        galeria.style.display = 'flex';
+        galeria.style.flexWrap = 'wrap';
+        galeria.style.justifyContent = 'center';
+        galeria.style.alignItems = 'center';
+        galeria.style.gridGap = '20px';
+        
+
+        // Ajustar el margen entre los contenedores de imágenes
+        contenedores.forEach(function(contenedor) {
+
             contenedor.style.margin = '0px 10px 320px 10px'; // Margen para pantallas grandes
-            if (img) img.style.maxWidth = '200px'; // Ajustar el tamaño máximo de las imágenes
-        }
-        if (horas) horas.style.maxWidth = '250px'; // Ajustar el tamaño máximo de las horas
-        if (horas) horas.style.margin = '-95% 20%'; // Ajustar el tamaño máximo de los logros
 
-        
-        if (logros) logros.style.maxWidth = '250px'; // Ajustar el tamaño máximo de los logros
-        if (logros) logros.style.margin = '-110% 20%'; // Ajustar el tamaño máximo de los logros
-        
-        var progreso = contenedor.querySelector('.progress-container2');
-        if (progreso) progreso.style.maxWidth = '250px'; // Ajustar el tamaño máximo de la barra de progreso
-    });
+            var img = contenedor.querySelector('img');
+            if (img) img.style.maxWidth = '200px'; // Ajustar el tamaño máximo de las imágenes
+
+            var horas = contenedor.querySelector('.img-horas');
+            if (horas) horas.style.maxWidth = '250px'; // Ajustar el tamaño máximo de las horas
+            if (horas) horas.style.margin = '-95% 20%'; // Ajustar el tamaño máximo de los logros
+
+            var logros = contenedor.querySelector('.img-horas2');
+            if (logros) logros.style.maxWidth = '250px'; // Ajustar el tamaño máximo de los logros
+            if (logros) logros.style.margin = '-110% 20%'; // Ajustar el tamaño máximo de los logros
+
+            var progreso = contenedor.querySelector('.progress-container2');
+            if (progreso) progreso.style.maxWidth = '250px'; // Ajustar el tamaño máximo de la barra de progreso
+        });
+    }
 }
 
 // Función para restaurar las propiedades CSS originales de la galería
