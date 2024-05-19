@@ -427,7 +427,12 @@ function ordenarImagenes(criterio, ruta) {
     // Seleccionar el contenedor de galería
     var contenedorGaleria = document.querySelector('.gallery');
     var buscador = document.querySelector('.search-box');
-    restaurarPropiedadesCSS();
+    // Media query para detectar pantallas pequeñas
+    var isMobile = window.matchMedia("(max-width: 500px)").matches;
+    if (isMobile) {
+    } else {
+        restaurarPropiedadesCSS();
+    }
     buscador.value = "";
     // Eliminar todas las imágenes existentes
     while (contenedorGaleria.firstChild) {
