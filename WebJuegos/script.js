@@ -99,6 +99,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                             var img = document.createElement('img');
                             
                             img.src = rutaImagen;
+                            img.setAttribute('juego', row.Nombre);
                             img.alt = row.Nombre.replace(/([A-Z0-9])/g, ' $1').trim(); // Agregar alt para el buscador, con espacios
                             var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
                             img.setAttribute('href', hrefe);
@@ -186,7 +187,8 @@ function mostrarImagenesPorRuta(ruta, orden) {
                     var imagenSrc = this.getAttribute('src');
                     var imagenAlt = this.getAttribute("alt");
                     var imagenhref = this.getAttribute('href');
-                    var rutasDelJuego = plataformasJuegos[imagenAlt];
+                    var imagenJuego = this.getAttribute("juego");
+                    var rutasDelJuego = plataformasJuegos[imagenJuego];
                     var imagenRuta = rutasDelJuego;
                     var imagenHoras = this.getAttribute("data-hours-played");
                     var imagenMisLogros = this.getAttribute("data-achievements");
