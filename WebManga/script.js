@@ -10,7 +10,7 @@ function filtrarImagenes() {
     var imagenes = document.querySelectorAll('.gallery img');
     // Iterar sobre cada imagen y mostrar u ocultar según el texto de búsqueda
     imagenes.forEach(function(imagen) {
-        var alt = imagen.getAttribute('alt').toLowerCase();
+        var alt = imagen.getAttribute('alt').toLowerCase().replace(/[^\w\s]/gi, '');
         if (alt.includes(textoBusqueda)) {
             imagen.style.display = 'block'; // Mostrar la imagen
         } else {
@@ -102,7 +102,14 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
                             if (!nombresMostrados.has(row.Nombre)) {
                                 // Agregar el nombre al conjunto de nombres mostrados
                                 nombresMostrados.add(row.Nombre);
-
+                                if (ruta === "Mangas/TomosUnicos/"){
+                                    // Media query para detectar pantallas pequeñas
+                                    var isMobile = window.matchMedia("(max-width: 500px)").matches;
+                                    if (isMobile) {
+                                        let titulo = document.querySelector('h2');
+                                        titulo.style.marginBottom = "0.2%";
+                                    }
+                                }
                                 // Crear la ruta de la imagen
                                 var rutaImagen = row.Ruta + row.Nombre + row.Extension;
                                 rutaImagen = rutaImagen.toLowerCase();
