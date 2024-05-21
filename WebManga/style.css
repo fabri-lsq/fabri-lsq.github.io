@@ -615,4 +615,7 @@ h2 {
         display: flex;
         border: 1px solid black; /* Grosor del borde y color negro */
     }
+    .carousel img:hover {
+        transform: none;
+    }
 }
