@@ -433,12 +433,12 @@ h2 {
 /* Responsive CSS */
 @media (max-width: 500px) {
     #contador-imagenes {
-        width: 60%;
+        width: 65%;
         display: inline-block;
         font-size: 14px;
-        margin-top: 30px;
+        margin-top: 25px;
         margin-bottom: -25px;
-        margin-left: 21.2%;
+        margin-left: 18%;
         margin-right: 0%;
     }
     .menu-toggle {
@@ -491,11 +491,14 @@ h2 {
     #menu2 {
         margin-left: 10px;
         font-size: 14px;
-        margin-top: 3%; 
+        margin-top: 6%;
     }
     .gallery {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         grid-gap: 20px;
+    }
+    .gallery img{
+        max-width: 200px; /* Ancho máximo igual al ancho del contenedor */
     }
     .img-horas {
         font-size: 7vh;
@@ -565,7 +568,7 @@ h2 {
     .botonMostrar2 {
         margin-left: 10px; /* Añadimos un margen izquierdo para separar los botones */
         margin-left: 83%;
-        margin-top: -13.3%;
+        margin-top: -13.7%;
         display: inline-block;
         vertical-align: middle;
     }
@@ -580,5 +583,34 @@ h2 {
     }
     .botonMostrar2::before {
         font-size: 16px;
+        margin-left: 70%;
+    }
+    .carousel {
+        height: 37vh;
+        /*border: 1px solid rgb(255, 255, 255);  Grosor del borde y color negro */
+        /*border-radius: 500px;*/
+        width: 112%;
+        margin-left: -6%;
+    }
+    
+    .carousel .carousel-item {
+        opacity: 1 !important;
+    }
+    
+    .carousel .carousel-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .carousel img {
+        max-width: 300px; /* Ancho máximo igual al ancho del contenedor */
+        width: 100%;
+        height: auto;
+        transition: all 300ms;
+        position: relative;
+        display: flex;
+        border: 1px solid black; /* Grosor del borde y color negro */
+        margin-top: -20%;
     }
 }

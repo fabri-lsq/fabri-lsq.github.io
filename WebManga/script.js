@@ -38,8 +38,14 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
     // Eliminar cualquier contenido existente en el contenedor
     contenedor.innerHTML = '';
 
+    var isMobile = window.matchMedia("(max-width: 500px)").matches;
+    if (isMobile) {
+        contenedor.style.gridTemplateColumns = 'repeat(auto-fit, minmax(140px, 1fr))';
+    } else {
+        contenedor.style.gridTemplateColumns = 'repeat(auto-fit, minmax(190px, 1fr))';
+    }
+
     contenedor.style.display = 'grid';
-    contenedor.style.gridTemplateColumns = 'repeat(auto-fit, minmax(190px, 1fr))';
     contenedor.style.margin = '3%';
     contenedor.style.gridGap = '30px';
     contenedor.style.filter = 'drop-shadow(6px 6px 5px rgb(107, 64, 224))';
@@ -292,7 +298,7 @@ function mostrarCantidadImagenes() {
         contador.textContent = "Completa";
         contador.style.backgroundColor = "rgb(37, 203, 57)";
     } else{
-    contador.textContent = 'Tengo: ' + contadorConTengo + '| Faltan: ' + (contadorTotal-contadorConTengo) + '| Total: ' + contadorTotal;
+    contador.textContent = 'Tengo: ' + contadorConTengo + ' | Faltan: ' + (contadorTotal-contadorConTengo) + ' | Total: ' + contadorTotal;
     }
     //centrarImagenesGaleria();
 }
@@ -528,10 +534,10 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
                     
                     // Crear un objeto para la imagen con los atributos src y alt
                     var imagen = {
-                        src: row.Ruta + row.Nombre + row.Extension,
+                        src: (row.Ruta + row.Nombre + row.Extension).toLowerCase(),
                         alt: row.Nombre.replace(/([A-Za-z]+)(\d+)/g, '$1 $2')
                     };
-            
+
                     // Agregar atributos de datos al objeto de la imagen
                     Object.assign(imagen, {
                         'data-tenencia': row.LoTengo,
