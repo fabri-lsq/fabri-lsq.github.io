@@ -461,11 +461,11 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
         complete: function(results) {
             // Ordenar los resultados en función del parámetro 'orden'
             if (orden === 'nombre') {
-                let filteredResults = results.data.filter(item => item.LoTengo === 'Si');
+                let filteredResults = results.data.filter(item => item.Name === 'Si');
                 results.data = filteredResults;
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
             } else if (orden === 'nombre2') {
-                let filteredResults = results.data.filter(item => item.LoTengo === 'Si');
+                let filteredResults = results.data.filter(item => item.Name === 'Si');
                 results.data = filteredResults;
                 results.data.sort((a, b) => (b.Nombre > a.Nombre) ? 1 : -1);
             } else if (orden === 'tenencia') {
