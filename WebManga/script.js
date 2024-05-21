@@ -26,11 +26,29 @@ function filtrarImagenes() {
     }
 }
 function mostrarImagenesPorRuta(ruta, orden, mostrar) {
+    localStorage.setItem('mostrarImagenes', 'grid');
+
     // Crear un conjunto para almacenar los nombres de las imágenes mostradas
     var nombresMostrados = new Set();
     var csv = "Mangas.csv"; // CSV fijo    
     var arrayCantidad = new Array(42).fill(0);
     var n = 0;
+    var contenedor = document.querySelector('.gallery');
+
+    // Eliminar cualquier contenido existente en el contenedor
+    contenedor.innerHTML = '';
+
+    contenedor.style.display = 'grid';
+    contenedor.style.gridTemplateColumns = 'repeat(auto-fit, minmax(190px, 1fr))';
+    contenedor.style.margin = '3%';
+    contenedor.style.gridGap = '30px';
+    contenedor.style.filter = 'drop-shadow(6px 6px 5px rgb(107, 64, 224))';
+    contenedor.style.position = 'relative';
+
+    var container = document.querySelector('.container');
+    container.style.margin = '';
+    container.style.maxWidth = '';
+    container.style.width = '';
 
     // Parsear el archivo CSV
     Papa.parse(csv, {
@@ -145,7 +163,7 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
                                     var contenedor = document.querySelector('.gallery');
                                     var img = document.createElement('img');
                                     img.src = rutaImagen;
-                                    img.alt = row.Nombre; // Agregar alt para el buscador
+                                    img.alt = row.Nombre.replace(/([A-Za-z]+)(\d+)/g, '$1 $2');; // Agregar alt para el buscador
                                     var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
                                     img.setAttribute('href', hrefe);
                                     img.setAttribute('data-tenencia', row.LoTengo); // Agregar atributo de datos para los logros
@@ -287,23 +305,43 @@ function ordenarImagenes(ruta, criterio, mostrar) {
     while (contenedorGaleria.firstChild) {
         contenedorGaleria.removeChild(contenedorGaleria.firstChild);
     }
-    if(criterio== "nombre"){
-        mostrarImagenesPorRuta(ruta, "nombre", mostrar);
-    } else if(criterio== "nombre2"){
-        mostrarImagenesPorRuta(ruta, "nombre2", mostrar);
-    } else if(criterio== "lotengo"){
-        mostrarImagenesPorRuta(ruta, "lotengo", mostrar);    
-    } else if(criterio== "nolotengoA-Z"){
-        mostrarImagenesPorRuta(ruta, "nolotengoA-Z", mostrar);
-    } else if(criterio== "nolotengoZ-A"){
-        mostrarImagenesPorRuta(ruta, "nolotengoZ-A", mostrar);
-    } else if(criterio== "tenencia"){
-        mostrarImagenesPorRuta(ruta, "tenencia", mostrar);
-    } else if(criterio== "siguiendo"){
-        mostrarImagenesPorRuta(ruta, "siguiendo", mostrar);
-    } else if(criterio== "siguiendo2"){
-        mostrarImagenesPorRuta(ruta, "siguiendo2", mostrar);
-    } 
+    if(localStorage.getItem('mostrarImagenes') === 'grid'){
+        if(criterio== "nombre"){
+            mostrarImagenesPorRuta(ruta, "nombre", mostrar);
+        } else if(criterio== "nombre2"){
+            mostrarImagenesPorRuta(ruta, "nombre2", mostrar);
+        } else if(criterio== "lotengo"){
+            mostrarImagenesPorRuta(ruta, "lotengo", mostrar);    
+        } else if(criterio== "nolotengoA-Z"){
+            mostrarImagenesPorRuta(ruta, "nolotengoA-Z", mostrar);
+        } else if(criterio== "nolotengoZ-A"){
+            mostrarImagenesPorRuta(ruta, "nolotengoZ-A", mostrar);
+        } else if(criterio== "tenencia"){
+            mostrarImagenesPorRuta(ruta, "tenencia", mostrar);
+        } else if(criterio== "siguiendo"){
+            mostrarImagenesPorRuta(ruta, "siguiendo", mostrar);
+        } else if(criterio== "siguiendo2"){
+            mostrarImagenesPorRuta(ruta, "siguiendo2", mostrar);
+        } 
+    } else if(localStorage.getItem('mostrarImagenes') === 'horizontal'){
+        if(criterio== "nombre"){
+            mostrarImagenesPorRutaHorizontal(ruta, "nombre", mostrar);
+        } else if(criterio== "nombre2"){
+            mostrarImagenesPorRutaHorizontal(ruta, "nombre2", mostrar);
+        } else if(criterio== "lotengo"){
+            mostrarImagenesPorRutaHorizontal(ruta, "lotengo", mostrar);    
+        } else if(criterio== "nolotengoA-Z"){
+            mostrarImagenesPorRutaHorizontal(ruta, "nolotengoA-Z", mostrar);
+        } else if(criterio== "nolotengoZ-A"){
+            mostrarImagenesPorRutaHorizontal(ruta, "nolotengoZ-A", mostrar);
+        } else if(criterio== "tenencia"){
+            mostrarImagenesPorRutaHorizontal(ruta, "tenencia", mostrar);
+        } else if(criterio== "siguiendo"){
+            mostrarImagenesPorRutaHorizontal(ruta, "siguiendo", mostrar);
+        } else if(criterio== "siguiendo2"){
+            mostrarImagenesPorRutaHorizontal(ruta, "siguiendo2", mostrar);
+        } 
+    }
 }
 
 // Función para restaurar las propiedades CSS originales de la galería
@@ -341,6 +379,16 @@ function abrirBlank(referencia) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar localStorage si no está configurado
+    if (!localStorage.getItem('nombre') && !localStorage.getItem('horas') && !localStorage.getItem('logros')) {
+        localStorage.setItem('Mangas/alternativas/', 'lotengo');
+        localStorage.setItem('all', 'nolotengoA-Z');
+        localStorage.setItem('all', 'nombre');
+        localStorage.setItem('all', 'siguiendo');
+        localStorage.setItem('Mangas/TomosUnicos/', 'lotengo');
+    }
+
+
     // Agregar evento de clic al fondo del modal para cerrarlo si se hace clic fuera del contenido del modal
     var modal = document.getElementById('modal');
     modal.addEventListener('click', function(event) {
@@ -377,3 +425,222 @@ function toggleMenu() {
     const menuItems = document.querySelector('.menu-items');
     menuItems.classList.toggle('active');
 }
+
+function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
+
+    localStorage.setItem('mostrarImagenes', 'horizontal');
+
+    var contenedor = document.querySelector('.gallery');
+    // Eliminar cualquier contenido existente en el contenedor
+    contenedor.innerHTML = '';
+
+    contenedor.style.display = '';
+    contenedor.style.gridTemplateColumns = '';
+    contenedor.style.margin = '0 auto';
+    contenedor.style.gridGap = '';
+    contenedor.style.filter = '';
+    contenedor.style.position = '';
+
+    var container = document.querySelector('.container');
+    container.style.margin = '0 auto';
+    container.style.maxWidth = '1280px';
+    container.style.width = '90%';
+
+
+    Papa.parse("Mangas.csv", {
+        download: true,
+        header: true,
+        complete: function(results) {
+            // Ordenar los resultados en función del parámetro 'orden'
+            if (orden === 'nombre') {
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.Name === 'Si');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
+            } else if(orden === 'nombre2'){
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.Name === 'Si');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (b.Nombre > a.Nombre) ? 1 : -1);
+            } else if (orden === 'tenencia') {
+                results.data.sort((a, b) => {
+                    if (a.LoTengo === b.LoTengo) {
+                        return 0;
+                    } else if (a.LoTengo === "Si") {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                });
+            } else if (orden === '01') {
+                // Filtrar los resultados que contienen "01" en el nombre
+                let filteredResults = results.data.filter(item => item.Nombre.includes('01'));
+                // Ordenar los resultados filtrados por nombre
+                filteredResults.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+                // Actualizar los resultados con los resultados filtrados y ordenados
+                results.data = filteredResults;
+            } else if (orden === 'lotengo') {
+                // Filtrar los resultados que tienen "Si" en LoTengo
+                let filteredResults = results.data.filter(item => item.LoTengo === 'Si');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+            } else if (orden === 'nolotengoA-Z') {
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.LoTengo === 'No');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
+            } else if (orden === 'nolotengoZ-A') {
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.LoTengo === 'No');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? -1 : 1);
+            } else if (orden === 'siguiendo') {
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.Siguiendo === 'Si');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
+            } else if (orden === 'siguiendo2') {
+                // Filtrar los resultados que tienen "No" en LoTengo
+                let filteredResults = results.data.filter(item => item.Siguiendo === 'Si');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? -1 : 1);
+            }
+
+            // Objeto para almacenar las imágenes agrupadas por serie
+            var series = {};
+
+            results.data.forEach(function(row) {
+                // Obtener el nombre de la serie eliminando los números
+                var serieNombre = row.Nombre.replace(/\d+/g, '');
+            
+                // Verificar si la ruta coincide o si se deben mostrar todas las imágenes
+                if (row.Ruta === ruta || ruta === "all") {
+                    // Si la serie aún no existe en el objeto, crear un arreglo vacío para ella
+                    if (!series[serieNombre]) {
+                        series[serieNombre] = [];
+                    }
+                    
+                    // Crear un objeto para la imagen con los atributos src y alt
+                    var imagen = {
+                        src: row.Ruta + row.Nombre + row.Extension,
+                        alt: row.Nombre.replace(/([A-Za-z]+)(\d+)/g, '$1 $2')
+                    };
+            
+                    // Agregar atributos de datos al objeto de la imagen
+                    Object.assign(imagen, {
+                        'data-tenencia': row.LoTengo,
+                        'data-editorial': row.Editorial,
+                        'data-estadoARG': row.EstadoARG,
+                        'data-estadoJPN': row.EstadoJPN,
+                        'data-UltimoTomoARG': row.UltimoTomoARG,
+                        'data-UltimoTomoJPN': row.UltimoTomoJPN
+                    });
+            
+                    // Agregar la imagen al arreglo de la serie correspondiente
+                    series[serieNombre].push(imagen);
+                }
+            });
+            
+
+            // Crear un carrusel para cada serie
+            Object.keys(series).forEach(function(serieNombre) {
+                var carouselDiv = document.createElement('div');
+                carouselDiv.className = 'carousel center-align';
+            
+                series[serieNombre].forEach(function(imagen) {
+                    var carouselItemDiv = document.createElement('div');
+                    carouselItemDiv.className = 'carousel-item';
+                
+                    // Crear la imagen y asignar sus atributos src y alt
+                    var img = document.createElement('img');
+                    
+                    img.src = imagen.src;
+                    img.alt = imagen.alt;
+
+                    // Agregar clases adicionales según sea necesario, como "nolotengo"
+                    if (imagen['data-tenencia'] === 'No'){
+                        img.className = 'nolotengo';
+                    }
+                
+                    // Agregar la imagen al div del carrusel
+                    carouselItemDiv.appendChild(img);
+                    carouselDiv.appendChild(carouselItemDiv);
+                });
+                //var titulo = document.createElement('h2');
+                //titulo.className = 'titulo';
+                //titulo.textContent = serieNombre;
+                //contenedor.appendChild(titulo);
+                // Agregar el carrusel completo al contenedor principal
+                contenedor.appendChild(carouselDiv);
+            });
+
+            if (mostrar === "si") {
+                mostrarCantidadImagenes();
+            }
+
+            // Inicializar todos los carruseles después de agregar las imágenes
+            var elems = document.querySelectorAll('.carousel');
+            elems.forEach(function(carousel) {
+                var images = carousel.querySelectorAll('.carousel-item');
+                var numImages = images.length;
+                var numVisible = 7; // Número de imágenes visibles en el carrusel
+            
+                // Clonar imágenes para que haya suficientes para mostrar
+                var clonesNeeded = Math.ceil(numVisible / numImages);
+                for (var i = 0; i < clonesNeeded; i++) {
+                    images.forEach(function(image) {
+                        var clone = image.cloneNode(true);
+                        carousel.appendChild(clone);
+                    });
+                }
+            
+                // Inicializar el carrusel con las opciones personalizadas
+                M.Carousel.init(carousel, {
+                    duration: 1500,
+                    dist: 0,
+                    shift: 0,
+                    padding: 10,
+                    numVisible: numVisible,
+                    indicators: false,
+                    noWrap: false,
+                    interval: 100,
+                });
+            });
+            
+            
+            // Agregar el evento click para mostrar el modal
+            var imagenes = document.querySelectorAll('.carousel img');
+            imagenes.forEach(function(imagen) {
+                imagen.addEventListener('click', function() {
+                    var imagenSrc = this.getAttribute('src');
+                    var imagenAlt = this.getAttribute("alt");
+                    var ImagenEditorial = this.getAttribute('data-editorial');
+                    var imagenTenencia = this.getAttribute("data-tenencia");
+                    var imagenEstadoARG = this.getAttribute("data-estadoARG");
+                    var imagenEstadoJPN = this.getAttribute("data-estadoJPN");
+                    var imagenUltimoTomoARG = this.getAttribute("data-UltimoTomoARG");
+                    var imagenUltimoTomoJPN = this.getAttribute("data-UltimoTomoJPN");
+                    var nimage = this.getAttribute('posicionCantidad');
+                    var cantidadTomos = arrayCantidad[nimage];
+
+                    var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Editorial: </a><a class='Datos'>" + ImagenEditorial + "</a></div><br>" + 
+                                "<div class='bloque'><a class='Subtittle'>LoTengo: </a><a class='Datos'>" + imagenTenencia + "</a></div>" + "<br>"+ "<div class='bloque'><a class='Subtittle'>Estadoᴬᴿ: </a><a class='Datos'>" + imagenEstadoARG + "</a></div><br>" +
+                                "<div class='bloque'><a class='Subtittle'>Estadoᴶᴾ: </a><a class='Datos'>" + imagenEstadoJPN + "</a></div><br>" + "<div class='bloque'><a class='Subtittle'>Completoᴬᴿ: </a><a class='Datos'>" + 
+                                cantidadTomos + "/" + imagenUltimoTomoARG + "</a></div><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" + 
+                                (cantidadTomos * 100 / imagenUltimoTomoARG) + "%'></div></div></div>" + "<div class='bloque2'><a class='Subtittle'>Completoᴶᴾ: </a><a class='Datos'>" + 
+                                cantidadTomos + "/" + imagenUltimoTomoJPN + "</a></div><br><div class='progress-container3'><div class='skill3'><div class='progress3' style='--wth:" + 
+                                (cantidadTomos * 100 / imagenUltimoTomoJPN) + "%'></div></div></div>";
+
+                    abrirModal(imagenSrc, texto);
+                });
+            });
+        }
+    });
+}
+
