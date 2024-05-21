@@ -433,11 +433,9 @@ function toggleMenu() {
 }
 
 function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
-
     localStorage.setItem('mostrarImagenes', 'horizontal');
 
     var contenedor = document.querySelector('.gallery');
-    // Eliminar cualquier contenido existente en el contenedor
     contenedor.innerHTML = '';
 
     contenedor.style.display = '';
@@ -452,6 +450,10 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
     container.style.maxWidth = '1280px';
     container.style.width = '90%';
 
+    // Crear un conjunto para almacenar los nombres de las imágenes mostradas
+    var nombresMostrados = new Set();
+    var arrayCantidad = new Array(42).fill(0); // Inicializar el array de cantidad de tomos
+    var n = 0; // Contador para la posición en arrayCantidad
 
     Papa.parse("Mangas.csv", {
         download: true,
@@ -459,15 +461,11 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
         complete: function(results) {
             // Ordenar los resultados en función del parámetro 'orden'
             if (orden === 'nombre') {
-                // Filtrar los resultados que tienen "No" en LoTengo
-                let filteredResults = results.data.filter(item => item.Name === 'Si');
-                // Actualizar los resultados con los resultados filtrados
+                let filteredResults = results.data.filter(item => item.LoTengo === 'Si');
                 results.data = filteredResults;
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
-            } else if(orden === 'nombre2'){
-                // Filtrar los resultados que tienen "No" en LoTengo
-                let filteredResults = results.data.filter(item => item.Name === 'Si');
-                // Actualizar los resultados con los resultados filtrados
+            } else if (orden === 'nombre2') {
+                let filteredResults = results.data.filter(item => item.LoTengo === 'Si');
                 results.data = filteredResults;
                 results.data.sort((a, b) => (b.Nombre > a.Nombre) ? 1 : -1);
             } else if (orden === 'tenencia') {
@@ -481,39 +479,26 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
                     }
                 });
             } else if (orden === '01') {
-                // Filtrar los resultados que contienen "01" en el nombre
                 let filteredResults = results.data.filter(item => item.Nombre.includes('01'));
-                // Ordenar los resultados filtrados por nombre
                 filteredResults.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
-                // Actualizar los resultados con los resultados filtrados y ordenados
                 results.data = filteredResults;
             } else if (orden === 'lotengo') {
-                // Filtrar los resultados que tienen "Si" en LoTengo
                 let filteredResults = results.data.filter(item => item.LoTengo === 'Si');
-                // Actualizar los resultados con los resultados filtrados
                 results.data = filteredResults;
             } else if (orden === 'nolotengoA-Z') {
-                // Filtrar los resultados que tienen "No" en LoTengo
                 let filteredResults = results.data.filter(item => item.LoTengo === 'No');
-                // Actualizar los resultados con los resultados filtrados
                 results.data = filteredResults;
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
             } else if (orden === 'nolotengoZ-A') {
-                // Filtrar los resultados que tienen "No" en LoTengo
                 let filteredResults = results.data.filter(item => item.LoTengo === 'No');
-                // Actualizar los resultados con los resultados filtrados
                 results.data = filteredResults;
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? -1 : 1);
             } else if (orden === 'siguiendo') {
-                // Filtrar los resultados que tienen "No" en LoTengo
                 let filteredResults = results.data.filter(item => item.Siguiendo === 'Si');
-                // Actualizar los resultados con los resultados filtrados
                 results.data = filteredResults;
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
             } else if (orden === 'siguiendo2') {
-                // Filtrar los resultados que tienen "No" en LoTengo
                 let filteredResults = results.data.filter(item => item.Siguiendo === 'Si');
-                // Actualizar los resultados con los resultados filtrados
                 results.data = filteredResults;
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? -1 : 1);
             }
@@ -521,68 +506,100 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
             // Objeto para almacenar las imágenes agrupadas por serie
             var series = {};
 
-            results.data.forEach(function(row) {
+            results.data.forEach(function(row, index) {
                 // Obtener el nombre de la serie eliminando los números
                 var serieNombre = row.Nombre.replace(/\d+/g, '');
-            
-                // Verificar si la ruta coincide o si se deben mostrar todas las imágenes
+
                 if (row.Ruta === ruta || ruta === "all") {
-                    // Si la serie aún no existe en el objeto, crear un arreglo vacío para ella
                     if (!series[serieNombre]) {
                         series[serieNombre] = [];
                     }
-                    
-                    // Crear un objeto para la imagen con los atributos src y alt
+
                     var imagen = {
                         src: (row.Ruta + row.Nombre + row.Extension).toLowerCase(),
-                        alt: row.Nombre.replace(/([A-Za-z]+)(\d+)/g, '$1 $2')
+                        alt: row.Nombre.replace(/([A-Za-z]+)(\d+)/g, '$1 $2'),
+                        loTengo: row.LoTengo,
+                        editorial: row.Editorial,
+                        estadoARG: row.EstadoARG,
+                        estadoJPN: row.EstadoJPN,
+                        ultimoTomoARG: row.UltimoTomoARG,
+                        ultimoTomoJPN: row.UltimoTomoJPN,
+                        posicionCantidad: n // Añadir la posición en el array de cantidad
                     };
 
-                    // Agregar atributos de datos al objeto de la imagen
-                    Object.assign(imagen, {
-                        'data-tenencia': row.LoTengo,
-                        'data-editorial': row.Editorial,
-                        'data-estadoARG': row.EstadoARG,
-                        'data-estadoJPN': row.EstadoJPN,
-                        'data-UltimoTomoARG': row.UltimoTomoARG,
-                        'data-UltimoTomoJPN': row.UltimoTomoJPN
-                    });
-            
-                    // Agregar la imagen al arreglo de la serie correspondiente
+                    // Contador de cuantos tengo
+                    if (index + 1 < results.data.length) {
+                        var nextElement = results.data[index + 1];
+
+                        let dataActual = row.Nombre.replace(/[0-9]/g, '');
+                        let serieSiguiente = nextElement.Nombre.replace(/[0-9]/g, '');
+                        let alternativasActual = dataActual.slice(-4);
+                        let alternativasSiguiente = serieSiguiente.slice(-4);
+
+                        if (dataActual === serieSiguiente) {
+                            if (row.LoTengo === "Si") {
+                                arrayCantidad[n]++;
+                            }
+                        } else if (alternativasActual == "_alt") {
+                            dataActual = dataActual.slice(0, -4);
+                            if (dataActual === serieSiguiente) {
+                                if (row.LoTengo === "Si") {
+                                    arrayCantidad[n]++;
+                                }
+                            }
+                        } else if (alternativasSiguiente == "_alt") {
+                            serieSiguiente = serieSiguiente.slice(0, -4);
+                            if (dataActual === serieSiguiente) {
+                                if (row.LoTengo === "Si") {
+                                    arrayCantidad[n]++;
+                                }
+                            }
+                        }
+
+                        if (dataActual !== serieSiguiente) {
+                            if (row.LoTengo === "Si") {
+                                arrayCantidad[n]++;
+                            }
+                            n++;
+                        }
+                    } else {
+                        n++;
+                        if (row.LoTengo === "Si") {
+                            arrayCantidad[n]++;
+                        }
+                    }
+
                     series[serieNombre].push(imagen);
                 }
             });
-            
 
-            // Crear un carrusel para cada serie
             Object.keys(series).forEach(function(serieNombre) {
                 var carouselDiv = document.createElement('div');
                 carouselDiv.className = 'carousel center-align';
-            
+
                 series[serieNombre].forEach(function(imagen) {
                     var carouselItemDiv = document.createElement('div');
                     carouselItemDiv.className = 'carousel-item';
-                
-                    // Crear la imagen y asignar sus atributos src y alt
+
                     var img = document.createElement('img');
-                    
                     img.src = imagen.src;
                     img.alt = imagen.alt;
+                    img.dataset.tenencia = imagen.loTengo;
+                    img.dataset.editorial = imagen.editorial;
+                    img.dataset.estadoArg = imagen.estadoARG;
+                    img.dataset.estadoJpn = imagen.estadoJPN;
+                    img.dataset.ultimoTomoArg = imagen.ultimoTomoARG;
+                    img.dataset.ultimoTomoJpn = imagen.ultimoTomoJPN;
+                    img.dataset.posicionCantidad = imagen.posicionCantidad; // Añadir la posición al dataset
 
-                    // Agregar clases adicionales según sea necesario, como "nolotengo"
-                    if (imagen['data-tenencia'] === 'No'){
+                    if (imagen.loTengo === 'No') {
                         img.className = 'nolotengo';
                     }
-                
-                    // Agregar la imagen al div del carrusel
+
                     carouselItemDiv.appendChild(img);
                     carouselDiv.appendChild(carouselItemDiv);
                 });
-                //var titulo = document.createElement('h2');
-                //titulo.className = 'titulo';
-                //titulo.textContent = serieNombre;
-                //contenedor.appendChild(titulo);
-                // Agregar el carrusel completo al contenedor principal
+
                 contenedor.appendChild(carouselDiv);
             });
 
@@ -590,14 +607,12 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
                 mostrarCantidadImagenes();
             }
 
-            // Inicializar todos los carruseles después de agregar las imágenes
             var elems = document.querySelectorAll('.carousel');
             elems.forEach(function(carousel) {
                 var images = carousel.querySelectorAll('.carousel-item');
                 var numImages = images.length;
-                var numVisible = 7; // Número de imágenes visibles en el carrusel
-            
-                // Clonar imágenes para que haya suficientes para mostrar
+                var numVisible = 7;
+
                 var clonesNeeded = Math.ceil(numVisible / numImages);
                 for (var i = 0; i < clonesNeeded; i++) {
                     images.forEach(function(image) {
@@ -605,10 +620,9 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
                         carousel.appendChild(clone);
                     });
                 }
-            
-                // Inicializar el carrusel con las opciones personalizadas
+
                 M.Carousel.init(carousel, {
-                    duration: 1500,
+                    duration: 100,
                     dist: 0,
                     shift: 0,
                     padding: 10,
@@ -618,30 +632,28 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
                     interval: 100,
                 });
             });
-            
-            
-            // Agregar el evento click para mostrar el modal
+
             var imagenes = document.querySelectorAll('.carousel img');
             imagenes.forEach(function(imagen) {
                 imagen.addEventListener('click', function() {
-                    var imagenSrc = this.getAttribute('src');
-                    var imagenAlt = this.getAttribute("alt");
-                    var ImagenEditorial = this.getAttribute('data-editorial');
-                    var imagenTenencia = this.getAttribute("data-tenencia");
-                    var imagenEstadoARG = this.getAttribute("data-estadoARG");
-                    var imagenEstadoJPN = this.getAttribute("data-estadoJPN");
-                    var imagenUltimoTomoARG = this.getAttribute("data-UltimoTomoARG");
-                    var imagenUltimoTomoJPN = this.getAttribute("data-UltimoTomoJPN");
-                    var nimage = this.getAttribute('posicionCantidad');
+                    var imagenSrc = this.src;
+                    var imagenAlt = this.alt;
+                    var ImagenEditorial = this.dataset.editorial;
+                    var imagenTenencia = this.dataset.tenencia;
+                    var imagenEstadoARG = this.dataset.estadoArg;
+                    var imagenEstadoJPN = this.dataset.estadoJpn;
+                    var imagenUltimoTomoARG = this.dataset.ultimoTomoArg;
+                    var imagenUltimoTomoJPN = this.dataset.ultimoTomoJpn;
+                    var nimage = this.dataset.posicionCantidad; // Obtener la posición desde el dataset
                     var cantidadTomos = arrayCantidad[nimage];
 
-                    var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Editorial: </a><a class='Datos'>" + ImagenEditorial + "</a></div><br>" + 
-                                "<div class='bloque'><a class='Subtittle'>LoTengo: </a><a class='Datos'>" + imagenTenencia + "</a></div>" + "<br>"+ "<div class='bloque'><a class='Subtittle'>Estadoᴬᴿ: </a><a class='Datos'>" + imagenEstadoARG + "</a></div><br>" +
-                                "<div class='bloque'><a class='Subtittle'>Estadoᴶᴾ: </a><a class='Datos'>" + imagenEstadoJPN + "</a></div><br>" + "<div class='bloque'><a class='Subtittle'>Completoᴬᴿ: </a><a class='Datos'>" + 
-                                cantidadTomos + "/" + imagenUltimoTomoARG + "</a></div><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" + 
-                                (cantidadTomos * 100 / imagenUltimoTomoARG) + "%'></div></div></div>" + "<div class='bloque2'><a class='Subtittle'>Completoᴶᴾ: </a><a class='Datos'>" + 
-                                cantidadTomos + "/" + imagenUltimoTomoJPN + "</a></div><br><div class='progress-container3'><div class='skill3'><div class='progress3' style='--wth:" + 
-                                (cantidadTomos * 100 / imagenUltimoTomoJPN) + "%'></div></div></div>";
+                    var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Editorial: </a><a class='Datos'>" + ImagenEditorial + "</a></div><br>" +
+                        "<div class='bloque'><a class='Subtittle'>LoTengo: </a><a class='Datos'>" + imagenTenencia + "</a></div>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Estadoᴬᴿ: </a><a class='Datos'>" + imagenEstadoARG + "</a></div><br>" +
+                        "<div class='bloque'><a class='Subtittle'>Estadoᴶᴾ: </a><a class='Datos'>" + imagenEstadoJPN + "</a></div><br>" + "<div class='bloque'><a class='Subtittle'>Completoᴬᴿ: </a><a class='Datos'>" +
+                        cantidadTomos + "/" + imagenUltimoTomoARG + "</a></div><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" +
+                        (cantidadTomos * 100 / imagenUltimoTomoARG) + "%'></div></div></div>" + "<div class='bloque2'><a class='Subtittle'>Completoᴶᴾ: </a><a class='Datos'>" +
+                        cantidadTomos + "/" + imagenUltimoTomoJPN + "</a></div><br><div class='progress-container3'><div class='skill3'><div class='progress3' style='--wth:" +
+                        (cantidadTomos * 100 / imagenUltimoTomoJPN) + "%'></div></div></div>";
 
                     abrirModal(imagenSrc, texto);
                 });
@@ -649,4 +661,3 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
         }
     });
 }
-
