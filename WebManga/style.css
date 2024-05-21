@@ -346,6 +346,9 @@ h2 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
 }
+#completoAR {
+    margin-top: 0%;
+}
 .Datos{
     display: flex;
     justify-content: left; 
@@ -535,12 +538,24 @@ h2 {
     .Subtittle {
         font-size: 4vw; /* Adjust font size */
     }
+    #completoAR {
+        margin-top: -5%;
+    }
     .Datos {
         font-size: 3vw; /* Adjust font size */
     }
     .progress-container {
         width: 100%;
         margin: 10px 0;
+    }
+    .progress-container3 {
+        position: relative;
+        width: 150%;
+        height: 1%;
+        float: right;
+        margin-right: 0%;
+        margin-top: -2%;
+        display: block;
     }
     .close {
         font-size: 40px; /* Reduce font size */
@@ -614,8 +629,5 @@ h2 {
         position: relative;
         display: flex;
         border: 1px solid black; /* Grosor del borde y color negro */
-    }
-    .carousel img:hover {
-        transform: none;
     }
 }

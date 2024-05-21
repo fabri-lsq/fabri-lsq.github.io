@@ -250,7 +250,7 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
                     var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Editorial: </a><a class='Datos'>" + ImagenEditorial + "</a></div><br>" + 
                                 "<div class='bloque'><a class='Subtittle'>LoTengo: </a><a class='Datos'>" + imagenTenencia + "</a></div>" + "<br>"+ "<div class='bloque'><a class='Subtittle'>Estadoᴬᴿ: </a><a class='Datos'>" + imagenEstadoARG + "</a></div><br>" +
                                 "<div class='bloque'><a class='Subtittle'>Estadoᴶᴾ: </a><a class='Datos'>" + imagenEstadoJPN + "</a></div><br>" + "<div class='bloque'><a class='Subtittle'>Completoᴬᴿ: </a><a class='Datos'>" + 
-                                cantidadTomos + "/" + imagenUltimoTomoARG + "</a></div><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" + 
+                                cantidadTomos + "/" + imagenUltimoTomoARG + "</a></div><br><div class='progress-container'><div class='skill'><div class='progress' id='completoAR' style='--wth:" + 
                                 (cantidadTomos * 100 / imagenUltimoTomoARG) + "%'></div></div></div>" + "<div class='bloque2'><a class='Subtittle'>Completoᴶᴾ: </a><a class='Datos'>" + 
                                 cantidadTomos + "/" + imagenUltimoTomoJPN + "</a></div><br><div class='progress-container3'><div class='skill3'><div class='progress3' style='--wth:" + 
                                 (cantidadTomos * 100 / imagenUltimoTomoJPN) + "%'></div></div></div>" ; // Añadir el texto al elemento de texto
@@ -647,13 +647,13 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
                     var nimage = this.dataset.posicionCantidad; // Obtener la posición desde el dataset
                     var cantidadTomos = arrayCantidad[nimage];
 
-                    var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Editorial: </a><a class='Datos'>" + ImagenEditorial + "</a></div><br>" +
-                        "<div class='bloque'><a class='Subtittle'>LoTengo: </a><a class='Datos'>" + imagenTenencia + "</a></div>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Estadoᴬᴿ: </a><a class='Datos'>" + imagenEstadoARG + "</a></div><br>" +
-                        "<div class='bloque'><a class='Subtittle'>Estadoᴶᴾ: </a><a class='Datos'>" + imagenEstadoJPN + "</a></div><br>" + "<div class='bloque'><a class='Subtittle'>Completoᴬᴿ: </a><a class='Datos'>" +
-                        cantidadTomos + "/" + imagenUltimoTomoARG + "</a></div><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" +
-                        (cantidadTomos * 100 / imagenUltimoTomoARG) + "%'></div></div></div>" + "<div class='bloque2'><a class='Subtittle'>Completoᴶᴾ: </a><a class='Datos'>" +
-                        cantidadTomos + "/" + imagenUltimoTomoJPN + "</a></div><br><div class='progress-container3'><div class='skill3'><div class='progress3' style='--wth:" +
-                        (cantidadTomos * 100 / imagenUltimoTomoJPN) + "%'></div></div></div>";
+                    var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + "<div class='bloque'><a class='Subtittle'>Editorial: </a><a class='Datos'>" + ImagenEditorial + "</a></div><br>" + 
+                                "<div class='bloque'><a class='Subtittle'>LoTengo: </a><a class='Datos'>" + imagenTenencia + "</a></div>" + "<br>"+ "<div class='bloque'><a class='Subtittle'>Estadoᴬᴿ: </a><a class='Datos'>" + imagenEstadoARG + "</a></div><br>" +
+                                "<div class='bloque'><a class='Subtittle'>Estadoᴶᴾ: </a><a class='Datos'>" + imagenEstadoJPN + "</a></div><br>" + "<div class='bloque'><a class='Subtittle'>Completoᴬᴿ: </a><a class='Datos'>" + 
+                                cantidadTomos + "/" + imagenUltimoTomoARG + "</a></div><br><div class='progress-container'><div class='skill'><div class='progress' id='completoAR' style='--wth:" + 
+                                (cantidadTomos * 100 / imagenUltimoTomoARG) + "%'></div></div></div>" + "<div class='bloque2'><a class='Subtittle'>Completoᴶᴾ: </a><a class='Datos'>" + 
+                                cantidadTomos + "/" + imagenUltimoTomoJPN + "</a></div><br><div class='progress-container3'><div class='skill3'><div class='progress3' style='--wth:" + 
+                                (cantidadTomos * 100 / imagenUltimoTomoJPN) + "%'></div></div></div>" ; // Añadir el texto al elemento de texto
 
                     abrirModal(imagenSrc, texto);
                 });
