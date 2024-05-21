@@ -591,6 +591,7 @@ h2 {
         /*border-radius: 500px;*/
         width: 112%;
         margin-left: -6%;
+        margin-bottom: 0.1%;
     }
     
     .carousel .carousel-item {
@@ -611,6 +612,5 @@ h2 {
         position: relative;
         display: flex;
         border: 1px solid black; /* Grosor del borde y color negro */
-        margin-top: -20%;
     }
 }
