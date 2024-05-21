@@ -507,9 +507,10 @@ h2 {
         font-size: 7vh;
     }
     .modal-content {
+        scale: 80%;
         width: 90%;
         height: auto;
-        margin: 15% auto;
+        margin: auto auto;
     }
     .image-container {
         width: 100%;
