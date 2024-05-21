@@ -154,11 +154,23 @@ h2 {
 /* Responsive CSS */
 @media (max-width: 500px) {
     
+    h2 {
+        margin-top: 7%;
+    }
+
     .gallery{
         display: block;
         padding: 2em;
     }
     .gallery img {
         padding: 4%;
+        scale: 70%;
+        margin-top: -20%;
+    }
+    .overlay,
+    .overlay2,
+    .overlay3 {
+        scale: 70%;
+        margin-bottom: -20%;
     }
 }
