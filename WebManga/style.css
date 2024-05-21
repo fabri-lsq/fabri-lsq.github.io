@@ -592,6 +592,8 @@ h2 {
         width: 112%;
         margin-left: -6%;
         margin-bottom: 0.1%;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
     }
     
     .carousel .carousel-item {
