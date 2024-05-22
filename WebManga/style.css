@@ -634,6 +634,11 @@ h2 {
 }
 
 @media (max-width: 1200px) {
+    #contador-imagenes {
+        width: 35%;
+        display: inline-block;
+        margin-left: 361px;
+    }
     .botonMostrar {
         margin-left: 65%;
         margin-top: -9%;
