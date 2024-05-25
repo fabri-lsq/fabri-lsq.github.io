@@ -573,3 +573,23 @@ h2 {
     }
 
 }
+
+@media (max-width: 1200px) {
+    #contador-imagenes {
+        width: 35%;
+        display: inline-block;
+        margin-left: 361px;
+    }
+    .modal-content {
+        width: 70%;
+    }
+    .image-container{
+        width: 33vw;
+        max-height: 100%;
+    }
+    .content-container {
+        margin-top: 12%;
+        margin-left: 5%;
+        scale: 110%;
+    }
+}
