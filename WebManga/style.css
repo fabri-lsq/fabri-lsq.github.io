@@ -633,7 +633,7 @@ h2 {
     }
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 500px) and (max-width: 1200px) {
     #contador-imagenes {
         width: 35%;
         display: inline-block;
