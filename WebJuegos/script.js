@@ -58,19 +58,32 @@ function mostrarImagenesPorRuta(ruta, orden) {
             if (orden === 'nombre') {
                 results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
                 localStorage.setItem('nombre', 'true');
+                localStorage.setItem('instalado', 'false');
                 localStorage.setItem('horas', 'false');
                 localStorage.setItem('logros', 'false');
                 localStorage.setItem(ruta, 'nombre');
+            } else if (orden === 'instalado') {
+                // Filtrar los resultados que tienen "Si" en Instalado
+                let filteredResults = results.data.filter(item => item.Instalado === 'Si');
+                // Actualizar los resultados con los resultados filtrados
+                results.data = filteredResults;
+                localStorage.setItem('instalado', 'true');
+                localStorage.setItem('nombre', 'false');
+                localStorage.setItem('logros', 'false');
+                localStorage.setItem('horas', 'false');
+                localStorage.setItem(ruta, 'instalado');
             } else if (orden === 'horas') {
                 results.data.sort((a, b) => b.Horas - a.Horas);
                 localStorage.setItem('horas', 'true');
                 localStorage.setItem('nombre', 'false');
+                localStorage.setItem('instalado', 'false');
                 localStorage.setItem('logros', 'false');
                 localStorage.setItem(ruta, 'horas');
             } else if (orden === 'logros') {
                 results.data.sort((a, b) => b.PromedioLogros - a.PromedioLogros);
                 localStorage.setItem('logros', 'true');
                 localStorage.setItem('nombre', 'false');
+                localStorage.setItem('instalado', 'false');
                 localStorage.setItem('horas', 'false');
                 localStorage.setItem(ruta, 'logros');
             }
@@ -103,7 +116,8 @@ function mostrarImagenesPorRuta(ruta, orden) {
                             img.alt = row.Nombre.replace(/([A-Z])/g, ' $1').replace(/(\d)([A-Z])/g, '$1 $2').replace(/([A-Za-z])(\d)/g, '$1 $2').trim(); // Agregar alt para el buscador, con espacios
                             var hrefe = "https://youtube.com/results?search_query=" + row.Nombre + "+gameplay";
                             img.setAttribute('href', hrefe);
-                            img.setAttribute('data-platform', row.Ruta); // Agregar atributo de datos para la plataforma
+                            img.setAttribute('data-platform', plataformasJuegos[row.Nombre]); // Agregar atributo de datos para la plataforma
+                            img.setAttribute('data-installed', row.Instalado); // Agregar atributo de instalacion
                             img.setAttribute('data-hours-played', row.Horas); // Agregar atributo de datos para las horas jugadas
                             img.setAttribute('data-achievements', row.MisLogros); // Agregar atributo de datos para los logros
                             img.setAttribute('data-total-achievements', row.LogrosTotal); 
@@ -189,8 +203,9 @@ function mostrarImagenesPorRuta(ruta, orden) {
                     var imagenhref = this.getAttribute('href');
                     var imagenJuego = this.getAttribute("juego");
                     var rutasDelJuego = plataformasJuegos[imagenJuego];
-                    var imagenRuta = rutasDelJuego;
+                    var imagenRuta = String(rutasDelJuego);
                     var imagenHoras = this.getAttribute("data-hours-played");
+                    var imagenInstalado = this.getAttribute("data-installed");
                     var imagenMisLogros = this.getAttribute("data-achievements");
 
                     if(this.getAttribute("data-total-achievements") == 99){
@@ -201,12 +216,13 @@ function mostrarImagenesPorRuta(ruta, orden) {
                     }
                     var imagenPromedioLogros = this.getAttribute("data-promedio-achievements");
 
-                    var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + "<a class='Subtittle'>Plataforma: </a><a class='Datos'>" + imagenRuta + "</a><br>" + 
-                                "<a class='Subtittle'>Horas: </a><a class='Datos'>" + imagenHoras + "hs</a>" + "<br>" + "<a class='Subtittle'>Logros: </a><a class='Datos'>" + 
-                                imagenMisLogros + imagenLogrosTotales + "</a><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" + 
-                                imagenPromedioLogros + "%'></div></div></div>"; // Añadir el texto al elemento de texto
+                    var texto = "<a class='TittleGame'>" + imagenRuta + "</a><br>" + "<br>" + 
+                                "<a class='Subtittle'>Horas: </a><a class='Datos'>" + imagenHoras + "hs</a>" + "<br>" + 
+                                "<a class='Subtittle'>Instalado: </a><a class='Datos'>" + imagenInstalado + "</a><br>" +
+                                "<a class='Subtittle'>Logros: </a><a class='Datos'>" + imagenMisLogros + imagenLogrosTotales + 
+                                "</a><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" + imagenPromedioLogros + "%'></div></div></div>"; // Añadir el texto al elemento de texto
 
-                    abrirModal(imagenSrc, texto);
+                    abrirModal(imagenSrc, imagenRuta, texto);
                     abrirBlank(imagenhref);
                 });
             });
@@ -298,16 +314,95 @@ function mostrarCantidadImagenes() {
    var contador = document.getElementById('contador-imagenes');
    contador.textContent = '' + cantidadImagenes;
 }
-function abrirModal(imagenSrc, texto) {
+function abrirModal(imagenSrc, juego, texto) {
     var modal = document.getElementById('modal');
+    var modalContent = document.querySelector('.modal-content');
     var modalImage = document.getElementById('modal-image');
     var modalText = document.getElementById('modal-text'); // Nuevo elemento de texto
+
+    // Limpiar el filtro antes de aplicar uno nuevo
+    modalContent.style.filter = '';
+
+    // Restablecer la escala de la imagen
+    modalContent.style.setProperty('--scale', '1');
+    modalContent.style.setProperty('--right-value', '23%');
+
+    // Depuración: Verificar el valor de "juego"
+    console.log("Valor de juego:", juego);
+
+    if(juego==="steam/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(103, 220, 255))";
+        modalContent.style.border = "1px solid rgb(103, 220, 255)";
+    } else if(juego==="xbox/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(0, 255, 34))";
+        modalContent.style.border = "1px solid rgb(0, 255, 34)";
+    } else if(juego==="epicgames/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(255, 255, 255))";
+        modalContent.style.border = "1px solid rgb(255, 255, 255)";
+    } else if(juego==="ubisoft/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(0, 0, 0))";
+        modalContent.style.border = "1px solid rgb(255, 255, 255)";
+    } else if(juego==="epicgames/steam/" || juego==="steam/epicgames/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(103, 220, 255))";
+        modalContent.style.border = "1px solid rgb(103, 220, 255)";
+    } else if(juego==="epicgames/xbox/" || juego==="xbox/epicgames/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(0, 255, 34))";
+        modalContent.style.border = "1px solid rgb(0, 255, 34)";
+    } else if(juego==="ubisoft/epicgames/" || juego==="epicgames/ubisoft/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(255, 255, 255))";
+        modalContent.style.border = "1px solid rgb(255, 255, 255)";
+    } else if(juego==="xbox/steam/" || juego==="steam/xbox/"){
+        modalContent.style.filter = "drop-shadow(1px 1px 5px rgb(255, 255, 255))";
+        modalContent.style.border = "1px solid rgb(255, 255, 255)";
+    } else {
+        modalContent.style.border = "1px solid rgb(255, 255, 255)";
+    }
+
+    // Mapa de URLs de imágenes para cada valor de juego
+    var urlImagenes = {
+        "steam/": "url('steam.png')",
+        "xbox/": "url('xbox.png')",
+        "epicgames/": "url('epicgames.png')",
+        "ubisoft/": "url('ubisoft.png')",
+        "xbox/steam/": "url('steamxbox.png')",
+        "steam/xbox/": "url('steamxbox.png')", // Inversión de las plataformas
+        "epicgames/xbox/": "url('xboxepicgames.png')",
+        "xbox/epicgames/": "url('xboxepicgames.png')", // Inversión de las plataformas
+        "epicgames/steam/": "url('steam_epicgames.png')",
+        "steam/epicgames/": "url('steam_epicgames.png')", // Inversión de las plataformas
+        "ubisoft/epicgames/": "url('epicgames_ubisoft.png')",
+        "epicgames/ubisoft/": "url('epicgames_ubisoft.png')", // Inversión de las plataformas
+    };
+
+    // Verificar si la combinación de plataformas requiere cambiar la escala de la imagen
+    if (juego === "xbox/steam/" || 
+    juego === "steam/xbox/" || 
+    juego === "epicgames/xbox/" || 
+    juego === "xbox/epicgames/" || 
+    juego === "epicgames/steam/" || 
+    juego === "steam/epicgames/" || 
+    juego === "ubisoft/epicgames/" || 
+    juego === "epicgames/ubisoft/") {
+        modalContent.classList.add('scale-large');
+        modalContent.style.setProperty('--right-value', '41%');
+    } else {
+        modalContent.classList.remove('scale-large');
+    }
+
+    // Obtener la URL de la imagen de fondo según el valor de juego
+    var backgroundImageURL = urlImagenes[juego] || "url('steam.png')"; // Si el juego no está en el mapa, se usa una imagen por defecto
+    
+    // Aplicar la URL de la imagen de fondo al pseudo-elemento ::before
+    modalContent.style.setProperty('--background-image-url', backgroundImageURL);
+    
+    
 
     modalImage.src = imagenSrc;
     modalText.innerHTML = texto;
 
     modal.style.display = "block";
 }
+
 
 function abrirBlank(referencia) {
     window.addEventListener('click', function(event) {
@@ -328,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar localStorage si no está configurado
     if (!localStorage.getItem('nombre') && !localStorage.getItem('horas') && !localStorage.getItem('logros')) {
         localStorage.setItem('nombre', 'true');
+        localStorage.setItem('instalado', 'false');
         localStorage.setItem('horas', 'false');
         localStorage.setItem('logros', 'false');
         localStorage.setItem('index/', 'nombre');
@@ -349,6 +445,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (localStorage.getItem('nombre') === 'true') {
             mostrarImagenesPorRuta(rutaActual, "nombre");
             selectOrdenar.value = "nombre";
+        } else if (localStorage.getItem('instalado') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "instalado");
+            selectOrdenar.value = "instalado";
+        } else if (localStorage.getItem('horas') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "horas");
+            selectOrdenar.value = "horas";
+        } else if (localStorage.getItem('logros') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "logros");
+            selectOrdenar.value = "logros";
+        }
+    } else if(localStorage.getItem(rutaActual) === 'instalado'){
+        localStorage.setItem('horas', 'true');
+        if (localStorage.getItem('nombre') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "nombre");
+            selectOrdenar.value = "nombre";
+        } else if (localStorage.getItem('instalado') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "instalado");
+            selectOrdenar.value = "instalado";
         } else if (localStorage.getItem('horas') === 'true') {
             mostrarImagenesPorRuta(rutaActual, "horas");
             selectOrdenar.value = "horas";
@@ -361,6 +475,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (localStorage.getItem('nombre') === 'true') {
             mostrarImagenesPorRuta(rutaActual, "nombre");
             selectOrdenar.value = "nombre";
+        } else if (localStorage.getItem('instalado') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "instalado");
+            selectOrdenar.value = "instalado";
         } else if (localStorage.getItem('horas') === 'true') {
             mostrarImagenesPorRuta(rutaActual, "horas");
             selectOrdenar.value = "horas";
@@ -373,6 +490,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (localStorage.getItem('nombre') === 'true') {
             mostrarImagenesPorRuta(rutaActual, "nombre");
             selectOrdenar.value = "nombre";
+        } else if (localStorage.getItem('instalado') === 'true') {
+            mostrarImagenesPorRuta(rutaActual, "instalado");
+            selectOrdenar.value = "instalado";
         } else if (localStorage.getItem('horas') === 'true') {
             mostrarImagenesPorRuta(rutaActual, "horas");
             selectOrdenar.value = "horas";
@@ -442,6 +562,8 @@ function ordenarImagenes(criterio, ruta) {
     }
     if(criterio== "nombre"){
         mostrarImagenesPorRuta(ruta, "nombre");
+    } else if(criterio== "instalado"){
+        mostrarImagenesPorRuta(ruta, "instalado");    
     } else if(criterio== "horas"){
         mostrarImagenesPorRuta(ruta, "horas");    
     } else if(criterio== "logros"){

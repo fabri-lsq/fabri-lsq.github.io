@@ -352,11 +352,37 @@ h2 {
     background-color: rgba(0, 0, 0, 0.9); /* Usamos solo un valor para background-color */
 }
 .modal-content {
+    position: relative;
     background-color: #202124;
     margin: 8% auto;
     border: 1px solid #ffffff;
-    width: 55%; /* Reducimos el ancho para que haya más espacio para las imágenes */
+    width: 55%;
     height: 80%;
+    filter: none;
+    overflow: hidden;
+}
+
+.modal-content::before {
+    content: ""; /* Se utiliza para crear un pseudo-elemento */
+    position: absolute;
+    top: 80%;
+    left: 0;
+    right: var(--right-value); /* Utilizando la variable CSS personalizada */
+    bottom: 0;
+    background-image: var(--background-image-url, url('plataforma')); /* Ruta de la imagen de fondo */
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: right;
+    opacity: 0.5; /* Ajusta la opacidad aquí */
+    z-index: -1; /* Asegúrate de que esté detrás del contenido */
+    transform: scale(1); /* Escala inicial de la imagen */
+}
+.scale-normal::before {
+    transform: scale(1);
+}
+
+.scale-large::before {
+    transform: scale(1.7);
 }
 /* Sector de Imagen*/
 .image-container { 
@@ -449,6 +475,7 @@ h2 {
     font-weight: bold;
     margin-right: 3%;
     margin-top: 1%;
+    user-select: none;
 }
 .close:hover{
     color: rgb(0, 0, 0);
