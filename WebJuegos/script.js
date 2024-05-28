@@ -216,7 +216,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                     }
                     var imagenPromedioLogros = this.getAttribute("data-promedio-achievements");
 
-                    var texto = "<a class='TittleGame'>" + imagenRuta + "</a><br>" + "<br>" + 
+                    var texto = "<a class='TittleGame'>" + imagenAlt + "</a><br>" + "<br>" + 
                                 "<a class='Subtittle'>Horas: </a><a class='Datos'>" + imagenHoras + "hs</a>" + "<br>" + 
                                 "<a class='Subtittle'>Instalado: </a><a class='Datos'>" + imagenInstalado + "</a><br>" +
                                 "<a class='Subtittle'>Logros: </a><a class='Datos'>" + imagenMisLogros + imagenLogrosTotales + 
@@ -230,6 +230,29 @@ function mostrarImagenesPorRuta(ruta, orden) {
     });
 }
 
+// Array con las URLs de las imágenes a precargar
+var imageUrls = [
+    'steam.png',
+    'xbox.png',
+    'epicgames.png',
+    'ubisoft.png',
+    'steamxbox.png',
+    'xboxepicgames.png',
+    'steam_epicgames.png',
+    'epicgames_ubisoft.png',
+  ];
+  
+  // Función para cargar las imágenes
+  function preloadImages(urls) {
+    for (var i = 0; i < urls.length; i++) {
+      var img = new Image();
+      img.src = urls[i];
+    }
+  }
+  
+  // Llamada a la función de precarga de imágenes
+  preloadImages(imageUrls);
+  
 
 // Función para centrar y distribuir equitativamente las imágenes en la galería
 function centrarImagenesGaleria() {
@@ -323,9 +346,16 @@ function abrirModal(imagenSrc, juego, texto) {
     // Limpiar el filtro antes de aplicar uno nuevo
     modalContent.style.filter = '';
 
-    // Restablecer la escala de la imagen
-    modalContent.style.setProperty('--scale', '1');
-    modalContent.style.setProperty('--right-value', '23%');
+    
+    // Media query para detectar pantallas pequeñas
+    var isMobile = window.matchMedia("(max-width: 500px)").matches;
+    if (isMobile) {
+        modalContent.style.setProperty('--right-value', '-5%');
+    } else {
+        // Restablecer la escala de la imagen
+        modalContent.style.setProperty('--scale', '1');
+        modalContent.style.setProperty('--right-value', '23%');
+    }
 
     // Depuración: Verificar el valor de "juego"
     console.log("Valor de juego:", juego);
@@ -383,8 +413,15 @@ function abrirModal(imagenSrc, juego, texto) {
     juego === "steam/epicgames/" || 
     juego === "ubisoft/epicgames/" || 
     juego === "epicgames/ubisoft/") {
-        modalContent.classList.add('scale-large');
-        modalContent.style.setProperty('--right-value', '41%');
+
+        // Media query para detectar pantallas pequeñas
+        var isMobile = window.matchMedia("(max-width: 500px)").matches;
+        if (isMobile) {
+            modalContent.style.setProperty('--right-value', '-5%');
+        } else {
+            modalContent.classList.add('scale-large');
+            modalContent.style.setProperty('--right-value', '41%');
+        }
     } else {
         modalContent.classList.remove('scale-large');
     }

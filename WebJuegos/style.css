@@ -555,6 +555,21 @@ h2 {
         height: auto;
         margin: 15% auto;
     }
+    .modal-content::before {
+        content: ""; /* Se utiliza para crear un pseudo-elemento */
+        position: absolute;
+        top: 84%;
+        left: 0;
+        right: var(--right-value); /* Utilizando la variable CSS personalizada */
+        bottom: 0;
+        background-image: var(--background-image-url, url('plataforma')); /* Ruta de la imagen de fondo */
+        background-size: 60px;
+        background-repeat: no-repeat;
+        background-position: right;
+        opacity: 0.5; /* Ajusta la opacidad aquí */
+        z-index: -1; /* Asegúrate de que esté detrás del contenido */
+        transform: scale(0.7); /* Escala inicial de la imagen */
+    }
     .image-container {
         width: 100%;
         height: auto;
@@ -601,7 +616,7 @@ h2 {
 
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 500px) and (max-width: 1200px) {
     #contador-imagenes {
         width: 35%;
         display: inline-block;
