@@ -101,7 +101,7 @@ epicgames/;KingdomNewLands;.png;0;0;99;0;;;;;;No
 otros/;LeagueOfLegends;.png;0;0;99;0;;;;;;No
 epicgames/;LEGOFortnite;.png;1;0;99;0;;;;;;No
 steam/;LEGOTheLordOfTheRings;.png;0;0;48;0;;;;;;No
-xbox/;LiesOfP;.png;0;0;42;0;;;;;;No
+xbox/;LiesOfP;.png;0;0;42;0;;;;;;Si
 steam/;LifeIsStrange2;.png;0;0;46;0;;;;;;No
 epicgames/;LISATheJoyfulDefinitiveEdition;.png;0;0;10;0;;;;;;No
 epicgames/;LISAThePainfulDefinitiveEdition;.png;0;0;58;0;;;;;;No
@@ -127,7 +127,7 @@ epicgames/;NBA2K21;.png;0;0;99;0;;;;;;No
 steam/;NeonBoost;.png;0;0;99;0;;;;;;No
 xbox/;NieRAutomata;.png;0;0;48;0;;;;;;No
 epicgames/;NiohTheCompleteEdition;.png;0;0;99;0;;;;;;No
-xbox/;OldMansJourney;.png;0;0;12;0;;;;;;No
+xbox/;OldMansJourney;.png;0;0;12;0;;;;;;Si
 xbox/;OriAndTheBlindForestDefinitiveEdition;.png;0;0;57;0;;;;;;No
 xbox/;OuterWilds;.png;0;0;31;0;;;;;;No
 epicgames/;Paladins;.png;0;0;99;0;;;;;;No
@@ -166,7 +166,7 @@ epicgames/;Smite;.png;0;0;99;0;;;;;;No
 epicgames/;SnakebirdComplete;.png;0;0;99;0;;;;;;No
 epicgames/;SonicMania;.png;0;0;99;0;;;;;;No
 epicgames/;SpeedBrawl;.png;0;0;99;0;;;;;;No
-xbox/;StardewValley;.png;0;0;40;0;;;;;;No
+xbox/;StardewValley;.png;0;0;40;0;;;;;;Si
 epicgames/;STARWARSBattlefront2CelebrationEdition;.png;0;0;43;0;;;;;;No
 epicgames/;Subnautica;.png;0;0;99;0;;;;;;No
 xbox/;SubnauticaBelowZero;.png;0;0;13;0;;;;;;No
@@ -242,7 +242,7 @@ epicgames/;Overcooked2;.png;3;0;99;0;;;;;;Si
 otros/;PokeMMO;.png;0;0;99;0;;;;;;Si
 steam/;Ultrakill;.png;47;0;99;0;;;;;;Si
 steam/;CounterStrikeGlobalOffensive2;.png;495;1;1;100;;;;;;No
-xbox/;DoomEternal;.png;1;1;50;2;;;;;;Si
+xbox/;DoomEternal;.png;1;1;50;2;;;;;;No
 steam/;WizardOfLegend;.png;4;2;19;11;;;;;;Si
 steam/;UltimateChickenHorse;.png;3;6;31;19;;;;;;Si
 steam/;MetalGearRisingRevengeance;.png;4;7;60;12;;;;;;Si
