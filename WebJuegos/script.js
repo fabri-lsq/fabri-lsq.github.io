@@ -241,6 +241,11 @@ var imageUrls = [
     'xboxepicgames.png',
     'steam_epicgames.png',
     'epicgames_ubisoft.png',
+    "xbox/xbox.ico",
+    "ubisoft/ubisoft-copia.ico",
+    "steam/steam.ico",
+    "epicgames/epic.ico",
+    "game.ico"
   ];
   
   // Función para cargar las imágenes
