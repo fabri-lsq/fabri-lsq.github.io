@@ -485,7 +485,24 @@ h2 {
         -1px  1px 0 rgb(255, 255, 255),
          1px  1px 0 rgb(255, 255, 255); 
 }
-
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 10;
+    
+}
+#prev-button {
+    left: 10px;
+}
+#next-button {
+    right: 10px;
+}
 
 /* Responsive CSS */
 @media (max-width: 500px) {

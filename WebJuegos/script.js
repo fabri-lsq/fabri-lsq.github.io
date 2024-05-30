@@ -49,6 +49,8 @@ function mostrarImagenesPorRuta(ruta, orden) {
     var plataformasJuegos = {};
     var csv = "Juegos.csv"; // CSV fijo
     localStorage.setItem('ruta', ruta);
+    var num = 0;
+
     // Parsear el archivo CSV
     Papa.parse(csv, {
         download: true,
@@ -108,6 +110,9 @@ function mostrarImagenesPorRuta(ruta, orden) {
                             // Crear el div contenedor para la imagen
                             var divContenedor = document.createElement('div');
                             divContenedor.setAttribute('class', 'imagen-contenedor');
+                            var idIMG = 'img'+ num;
+                            divContenedor.setAttribute('id', idIMG);
+                            
 
                             // Crear la imagen
                             var img = document.createElement('img');
@@ -185,9 +190,11 @@ function mostrarImagenesPorRuta(ruta, orden) {
                                 var contenedor = document.querySelector('.gallery');
                                 contenedor.appendChild(divContenedor);
                             }
+                            num++;
                         } else {
                             plataformasJuegos[row.Nombre] += [row.Ruta];
                         }
+                        
                     }
                 }
             });
@@ -208,6 +215,8 @@ function mostrarImagenesPorRuta(ruta, orden) {
                     var imagenHoras = this.getAttribute("data-hours-played");
                     var imagenInstalado = this.getAttribute("data-installed");
                     var imagenMisLogros = this.getAttribute("data-achievements");
+                    // Obtener el ID del contenedor div
+                    var imgID = this.parentNode.getAttribute('id');
 
                     if(this.getAttribute("data-total-achievements") == 99){
                         var imagenLogrosTotales = " ";
@@ -223,7 +232,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                                 "<a class='Subtittle'>Logros: </a><a class='Datos'>" + imagenMisLogros + imagenLogrosTotales + 
                                 "</a><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" + imagenPromedioLogros + "%'></div></div></div>"; // Añadir el texto al elemento de texto
 
-                    abrirModal(imagenSrc, imagenRuta, texto);
+                    abrirModal(imagenSrc, imagenRuta, texto, imgID);
                     abrirBlank(imagenhref);
                 });
             });
@@ -343,7 +352,7 @@ function mostrarCantidadImagenes() {
    var contador = document.getElementById('contador-imagenes');
    contador.textContent = '' + cantidadImagenes;
 }
-function abrirModal(imagenSrc, juego, texto) {
+function abrirModal(imagenSrc, juego, texto, id) {
     var modal = document.getElementById('modal');
     var modalContent = document.querySelector('.modal-content');
     var modalImage = document.getElementById('modal-image');
@@ -439,12 +448,41 @@ function abrirModal(imagenSrc, juego, texto) {
     modalContent.style.setProperty('--background-image-url', backgroundImageURL);
     
     
-
+    
     modalImage.src = imagenSrc;
     modalText.innerHTML = texto;
-
+    
     modal.style.display = "block";
+    
+    var cantidadImagenes = document.querySelectorAll('.gallery img').length;
+
+    if( id === 'img0'){
+        nextDivId = 'img' + (getNumberFromId(id) + 1); // Ajusta esto según tu lógica
+        prevDivId = 'img' + (cantidadImagenes-1);
+    } else if( id === 'img' + (cantidadImagenes-1)){
+        nextDivId = 'img0';
+        prevDivId = 'img' + (getNumberFromId(id) - 1); // Ajusta esto según tu lógica
+    } else {
+        // Obtener el número del ID del próximo div al que se le hará clic
+        prevDivId = 'img' + (getNumberFromId(id) - 1); // Ajusta esto según tu lógica
+        nextDivId = 'img' + (getNumberFromId(id) + 1); // Ajusta esto según tu lógica
+    }
+
+    
+    
 }
+// Variable global para almacenar el ID del próximo div
+var nextDivId = null;
+function getNumberFromId(id) {
+    // Extraer solo el número del ID usando una expresión regular
+    var match = id.match(/\d+/);
+    if (match) {
+        return parseInt(match[0]);
+    } else {
+        return null; // Devolver null si no se encuentra ningún número en el ID
+    }
+}
+
 
 
 function abrirBlank(referencia) {
@@ -557,6 +595,79 @@ document.addEventListener('DOMContentLoaded', function() {
     closeButton.addEventListener('click', function() {
         modal.style.display = "none";
     });
+
+    // Agregar evento de clic al botón izquierdo del modal
+    var prevButton = document.getElementById('prev-button');
+    prevButton.addEventListener('click', function() {
+        modal.style.display = "none"; // Cierra el modal
+
+        // Abre la imagen correspondiente
+        var divToOpen = document.getElementById(prevDivId); // Cambia 'img2' al ID de la imagen que deseas abrir
+        if (divToOpen) {
+            var imagen = divToOpen.querySelector('img'); // Obtén la imagen dentro del div
+            if (imagen) {
+                imagen.click(); // Simula un clic en la imagen para abrir el modal
+            }
+        }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "ArrowLeft") {
+                modal.style.display = "none"; // Cierra el modal
+                // Abre la imagen correspondiente
+                var divToOpen = document.getElementById(prevDivId); // Cambia 'img2' al ID de la imagen que deseas abrir
+                if (divToOpen) {
+                    var imagen = divToOpen.querySelector('img'); // Obtén la imagen dentro del div
+                    if (imagen) {
+                        imagen.click(); // Simula un clic en la imagen para abrir el modal
+                    }
+                }
+            ;
+        }
+    });
+
+    // Agregar evento de clic al botón izquierdo del modal
+    var nextButton = document.getElementById('next-button');
+    nextButton.addEventListener('click', function() {
+        modal.style.display = "none"; // Cierra el modal
+
+        // Abre la imagen correspondiente
+        var divToOpen = document.getElementById(nextDivId); // Cambia 'img2' al ID de la imagen que deseas abrir
+        if (divToOpen) {
+            var imagen = divToOpen.querySelector('img'); // Obtén la imagen dentro del div
+            if (imagen) {
+                imagen.click(); // Simula un clic en la imagen para abrir el modal
+            }
+        }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "ArrowRight") {
+                modal.style.display = "none"; // Cierra el modal
+                // Abre la imagen correspondiente
+                var divToOpen = document.getElementById(nextDivId); // Cambia 'img2' al ID de la imagen que deseas abrir
+                if (divToOpen) {
+                    var imagen = divToOpen.querySelector('img'); // Obtén la imagen dentro del div
+                    if (imagen) {
+                        imagen.click(); // Simula un clic en la imagen para abrir el modal
+                    }
+                }
+            ;
+        }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "f" || event.key === "F") {
+            var divToOpen = document.getElementById('img2'); // Obtener el div con ID "img2"
+            if (divToOpen) {
+                var imagen = divToOpen.querySelector('img'); // Obtener la imagen dentro del div
+                if (imagen) {
+                    imagen.click(); // Simular un clic en la imagen
+                }
+            }
+        }
+    });
+    
 
     // Agregar evento de teclado para cerrar el modal con la tecla "Esc"
     document.addEventListener('keydown', function(event) {
