@@ -63,6 +63,7 @@ function mostrarImagenesPorRuta(ruta, orden) {
                 localStorage.setItem('logros', 'false');
                 localStorage.setItem(ruta, 'nombre');
             } else if (orden === 'instalado') {
+                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
                 // Filtrar los resultados que tienen "Si" en Instalado
                 let filteredResults = results.data.filter(item => item.Instalado === 'Si');
                 // Actualizar los resultados con los resultados filtrados
