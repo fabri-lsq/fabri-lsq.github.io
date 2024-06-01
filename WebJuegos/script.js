@@ -206,6 +206,13 @@ function mostrarImagenesPorRuta(ruta, orden) {
             var imagenes = document.querySelectorAll('.gallery img');
             imagenes.forEach(function(imagen) {
                 imagen.addEventListener('click', function() {
+                    // Evitar abrir el modal si se presiona Ctrl o el botón central del mouse
+                    if ((event.button === 1) || (event.ctrlKey && event.button === 0)) {
+                        var imagenhref = this.getAttribute('href');
+                        window.open(imagenhref, '_blank'); // Redirigir a la URL del video en una nueva pestaña
+                        event.stopPropagation(); // Detener la propagación del evento
+                        return false;
+                    }
                     var imagenSrc = this.getAttribute('src');
                     var imagenAlt = this.getAttribute("alt");
                     var imagenhref = this.getAttribute('href');
@@ -233,7 +240,6 @@ function mostrarImagenesPorRuta(ruta, orden) {
                                 "</a><br><div class='progress-container'><div class='skill'><div class='progress' style='--wth:" + imagenPromedioLogros + "%'></div></div></div>"; // Añadir el texto al elemento de texto
 
                     abrirModal(imagenSrc, imagenRuta, texto, imgID);
-                    abrirBlank(imagenhref);
                 });
             });
         }
@@ -485,13 +491,19 @@ function getNumberFromId(id) {
 
 
 
+let isEventListenerAdded = false; // Variable para controlar si el evento ya ha sido añadido
+
 function abrirBlank(referencia) {
-    window.addEventListener('click', function(event) {
-        if ((event.button === 1) || (event.ctrlKey && event.button === 0)) {
-            window.open(referencia, '_blank'); // Redirigir a la URL del video en una nueva pestaña
-            return false;
-        }
-    });
+    if (!isEventListenerAdded) {
+        window.addEventListener('click', function(event) {
+            if ((event.button === 1) || (event.ctrlKey && event.button === 0)) {
+                window.open(referencia, '_blank'); // Redirigir a la URL del video en una nueva pestaña
+                event.stopPropagation(); // Detener la propagación del evento
+                return false;
+            }
+        });
+        isEventListenerAdded = true; // Marcar que el evento ha sido añadido
+    }
 }
 
 
