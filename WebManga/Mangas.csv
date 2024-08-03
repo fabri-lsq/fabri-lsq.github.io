@@ -7,6 +7,11 @@ Mangas/Another/;Another01;.jpg;Si;Ivrea;Terminada;Terminada;5;5;No;;;Si
 Mangas/Another/;Another02;.jpg;Si;Ivrea;Terminada;Terminada;5;5;No;;;Si
 Mangas/Another/;Another03;.jpg;Si;Ivrea;Terminada;Terminada;5;5;No;;;Si
 Mangas/Another/;Another04;.jpg;Si;Ivrea;Terminada;Terminada;5;5;No;;;Si
+Mangas/AstroBoy/;AstroBoy01;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
+Mangas/AstroBoy/;AstroBoy02;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
+Mangas/AstroBoy/;AstroBoy03;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
+Mangas/AstroBoy/;AstroBoy04;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
+Mangas/AstroBoy/;AstroBoy05;.jpg;Si;Larp;Cancelada;Terminada;5;23;No;;;Si
 Mangas/Bakuman/;Bakuman01;.jpg;Si;Ivrea;Terminada;Terminada;20;20;No;;;Si
 Mangas/Bakuman/;Bakuman02;.jpg;Si;Ivrea;Terminada;Terminada;20;20;No;;;Si
 Mangas/Bakuman/;Bakuman03;.jpg;Si;Ivrea;Terminada;Terminada;20;20;No;;;Si
@@ -56,24 +61,25 @@ Mangas/BlueExorcist/;BlueExorcist26;.jpg;Si;Ivrea;En curso;En curso;29;30;No;;;S
 Mangas/BlueExorcist/;BlueExorcist27;.jpg;No;Ivrea;En curso;En curso;29;30;No;;;Si
 Mangas/BlueExorcist/;BlueExorcist28;.jpg;No;Ivrea;En curso;En curso;29;30;No;;;Si
 Mangas/BlueExorcist/;BlueExorcist29;.jpg;No;Ivrea;En curso;En curso;29;30;No;;;Si
-Mangas/ChainsawMan/;ChainsawMan01;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan02;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan03;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan04;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan05;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan06;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan07;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan08;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan09;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan10;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan11;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan12;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan13;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan14;.jpg;No;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/alternativas/;ChainsawMan14_alt;.jpg;Si;Ivrea;En curso;En curso;16;17;No;;;No
-Mangas/ChainsawMan/;ChainsawMan14_alt;.jpg;Si;Ivrea;En curso;En curso;16;17;No;;;No
-Mangas/ChainsawMan/;ChainsawMan15;.jpg;Si;Ivrea;En curso;En curso;16;17;Si;;;Si
-Mangas/ChainsawMan/;ChainsawMan16;.jpg;No;Ivrea;En curso;En curso;16;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan01;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan02;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan03;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan04;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan05;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan06;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan07;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan08;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan09;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan10;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan11;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan12;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan13;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan14;.jpg;No;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/alternativas/;ChainsawMan14_alt;.jpg;Si;Ivrea;En curso;En curso;17;17;No;;;No
+Mangas/ChainsawMan/;ChainsawMan14_alt;.jpg;Si;Ivrea;En curso;En curso;17;17;No;;;No
+Mangas/ChainsawMan/;ChainsawMan15;.jpg;Si;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan16;.jpg;No;Ivrea;En curso;En curso;17;17;Si;;;Si
+Mangas/ChainsawMan/;ChainsawMan17;.jpg;No;Ivrea;En curso;En curso;17;17;Si;;;Si
 Mangas/ChainsawMan/;ChainsawManBuddyNovel;.jpg;Si;Ivrea;TomoUnico;TomoUnico;1;1;No;17/05/2024;8000ARS;No
 Mangas/DGrayMan/;D.Gray-Man01;.jpg;Si;Ivrea;En curso;En curso;28;28;No;;;Si
 Mangas/DGrayMan/;D.Gray-Man02;.jpg;Si;Ivrea;En curso;En curso;28;28;No;;;Si
@@ -225,6 +231,18 @@ Mangas/Monster/;Monster06;.jpg;No;Ivrea;Terminada;Terminada;9;9;Si;;;Si
 Mangas/Monster/;Monster07;.jpg;No;Ivrea;Terminada;Terminada;9;9;Si;;;Si
 Mangas/Monster/;Monster08;.jpg;No;Ivrea;Terminada;Terminada;9;9;Si;;;Si
 Mangas/Monster/;Monster09;.jpg;No;Ivrea;Terminada;Terminada;9;9;Si;;;Si
+Mangas/MonsterLarp/;MonsterLarp01;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp02;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp03;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp04;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp05;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp06;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp07;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp08;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp09;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp10;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp11;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
+Mangas/MonsterLarp/;MonsterLarp12;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
 Mangas/Mx0/;Mx0-01;.jpg;Si;Ivrea;Terminada;Terminada;10;10;No;;;Si
 Mangas/Mx0/;Mx0-02;.jpg;No;Ivrea;Terminada;Terminada;10;10;No;;;Si
 Mangas/Mx0/;Mx0-03;.jpg;No;Ivrea;Terminada;Terminada;10;10;No;;;Si
@@ -237,87 +255,89 @@ Mangas/Mx0/;Mx0-09;.jpg;No;Ivrea;Terminada;Terminada;10;10;No;;;Si
 Mangas/Mx0/;Mx0-10;.jpg;No;Ivrea;Terminada;Terminada;10;10;No;;;Si
 Mangas/TomosUnicos/;MyCapricornFriend;.jpg;Si;Ivrea;TomoUnico;TomoUnico;1;1;No;;;No
 Mangas/TomosUnicos/;NijigaharaHolograph;.jpg;Si;Ivrea;TomoUnico;TomoUnico;1;1;No;;;No
-Mangas/OnePiece/;OnePiece01;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece02;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece03;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece04;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece05;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece06;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece07;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece08;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece09;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece10;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece11;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece12;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece13;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece14;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece15;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece16;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece17;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece18;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece19;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece20;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece21;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece22;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece23;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece24;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece25;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece26;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece27;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece28;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece29;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece30;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece31;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece32;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece33;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece34;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece35;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece36;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece37;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece38;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece39;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece40;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece41;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece42;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece43;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece44;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece45;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece46;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece47;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece48;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece49;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece50;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece51;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece52;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece53;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece54;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece55;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece56;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece57;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece58;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece59;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece60;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece61;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece62;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece63;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece64;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece65;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece66;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece67;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece68;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece69;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece70;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece71;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece72;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece73;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece74;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece75;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece76;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece77;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece78;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece79;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;;;Si
-Mangas/OnePiece/;OnePiece80;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;17/05/2024;5900ARS;Si
-Mangas/OnePiece/;OnePiece81;.jpg;Si;Ivrea;En curso;En curso;81;108;Si;15/06/2024;;Si
+Mangas/OnePiece/;OnePiece01;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece02;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece03;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece04;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece05;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece06;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece07;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece08;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece09;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece10;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece11;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece12;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece13;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece14;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece15;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece16;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece17;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece18;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece19;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece20;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece21;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece22;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece23;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece24;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece25;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece26;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece27;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece28;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece29;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece30;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece31;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece32;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece33;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece34;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece35;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece36;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece37;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece38;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece39;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece40;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece41;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece42;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece43;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece44;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece45;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece46;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece47;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece48;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece49;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece50;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece51;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece52;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece53;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece54;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece55;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece56;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece57;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece58;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece59;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece60;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece61;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece62;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece63;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece64;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece65;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece66;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece67;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece68;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece69;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece70;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece71;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece72;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece73;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece74;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece75;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece76;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece77;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece78;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece79;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;;;Si
+Mangas/OnePiece/;OnePiece80;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;17/05/2024;5900ARS;Si
+Mangas/OnePiece/;OnePiece81;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;15/06/2024;;Si
+Mangas/OnePiece/;OnePiece82;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;03/08/2024;3800ARS;Si
+Mangas/OnePiece/;OnePiece83;.jpg;Si;Ivrea;En curso;En curso;83;108;Si;03/08/2024;3800ARS;Si
 Mangas/OyasumiPunpun/;OyasumiPunpun01;.jpg;Si;Ivrea;Terminada;Terminada;13;13;No;;;Si
 Mangas/OyasumiPunpun/;OyasumiPunpun02;.jpg;Si;Ivrea;Terminada;Terminada;13;13;No;;;Si
 Mangas/OyasumiPunpun/;OyasumiPunpun03;.jpg;Si;Ivrea;Terminada;Terminada;13;13;No;;;Si
@@ -371,20 +391,3 @@ Mangas/Wotakoi/;Wotakoi11;.jpg;No;PaniniManga;Terminada;Terminada;11;11;Si;;;Si
 Mangas/alternativas/;Wotakoi11_alt;.jpg;Si;PaniniManga;Terminada;Terminada;11;11;No;;;Si
 Mangas/Wotakoi/;Wotakoi11_alt;.jpg;Si;PaniniManga;Terminada;Terminada;11;11;No;;;Si
 Mangas/YouAreInTheBlueSummer/;YouAreInTheBlueSummer;.jpg;Si;Ivrea;TomoUnico;TomoUnico;1;1;No;;;Si
-Mangas/AstroBoy/;AstroBoy01;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
-Mangas/AstroBoy/;AstroBoy02;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
-Mangas/AstroBoy/;AstroBoy03;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
-Mangas/AstroBoy/;AstroBoy04;.jpg;Si;DeuxManga;Cancelada;Terminada;5;23;No;;;Si
-Mangas/AstroBoy/;AstroBoy05;.jpg;Si;Larp;Cancelada;Terminada;5;23;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp01;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp02;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp03;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp04;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp05;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp06;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp07;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp08;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp09;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp10;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp11;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
-Mangas/MonsterLarp/;MonsterLarp12;.jpg;Si;Larp;Cancelada;Terminada;12;18;No;;;Si
