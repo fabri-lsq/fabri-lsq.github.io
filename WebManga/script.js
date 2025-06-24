@@ -64,9 +64,13 @@ function mostrarImagenesPorRuta(ruta, orden, mostrar) {
             
             // Ordenar los resultados en función del parámetro 'orden'
             if (orden === 'nombre') {
-                results.data.sort((a, b) => (a.Nombre > b.Nombre) ? 1 : -1);
+                results.data.sort((a, b) => {
+                    return a.Nombre.localeCompare(b.Nombre, undefined, { numeric: true, sensitivity: 'base' });
+                });
             } else if(orden === 'nombre2'){
-                results.data.sort((a, b) => (b.Nombre > a.Nombre) ? 1 : -1);
+                results.data.sort((a, b) => {
+                    return b.Nombre.localeCompare(a.Nombre, undefined, { numeric: true, sensitivity: 'base' });
+            });
             } else if (orden === 'tenencia') {
                 results.data.sort((a, b) => {
                     if (a.LoTengo === b.LoTengo) {
