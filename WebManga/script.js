@@ -664,7 +664,7 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
     });
 }
 
-fdocument.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     Papa.parse('Mangas.csv', {
         download: true,
         header: true,
