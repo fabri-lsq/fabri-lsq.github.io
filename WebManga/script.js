@@ -664,4 +664,58 @@ function mostrarImagenesPorRutaHorizontal(ruta, orden, mostrar) {
     });
 }
 
+fdocument.addEventListener('DOMContentLoaded', function() {
+    Papa.parse('Mangas.csv', {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+            mostrarMangasOrdenados(results.data);
+        }
+    });
+});
 
+function mostrarMangasOrdenados(data) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const mangaTitles = {};
+
+    // Inicializa los contenedores por cada letra
+    alphabet.forEach(letter => {
+        mangaTitles[letter] = [];
+    });
+
+    // Procesa los datos del CSV para obtener los títulos
+    data.forEach(row => {
+        const mangaTitle = row.Nombre;
+        const firstLetter = mangaTitle.charAt(0).toUpperCase();
+        
+        if (alphabet.includes(firstLetter) && !mangaTitles[firstLetter].includes(mangaTitle)) {
+            mangaTitles[firstLetter].push(mangaTitle);
+        }
+    });
+
+    const mangaListDiv = document.getElementById('tomos');
+    mangaListDiv.innerHTML = ''; // Limpiar el contenedor de mangas
+
+    Object.keys(mangaTitles).forEach(letter => {
+        if (mangaTitles[letter].length > 0) {
+            const letterSection = document.createElement('div');
+            letterSection.classList.add('letter-section');
+            letterSection.id = letter;
+            
+            const letterHeader = document.createElement('h2');
+            letterHeader.textContent = letter;
+            letterSection.appendChild(letterHeader);
+            
+            const titleList = document.createElement('ul');
+            mangaTitles[letter].forEach(title => {
+                const titleItem = document.createElement('li');
+                titleItem.textContent = title;
+                titleList.appendChild(titleItem);
+            });
+            
+            letterSection.appendChild(titleList);
+            mangaListDiv.appendChild(letterSection);
+        }
+    });
+}
