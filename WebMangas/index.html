@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mangas - Biblioteca Virtual</title>
+<link rel="icon" href="Sol.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET & VARIABLES ───────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  :root {
+    --bg:        #0e0e12;
+    --surface:   #16161d;
+    --border:    #2a2a38;
+    --accent:    #c084fc;
+    --accent2:   #818cf8;
+    --text:      #e2e2f0;
+    --muted:     #6b6b8a;
+    --tengo:     #a3e635;
+    --notengo:   #374151;
+    --card-w:    160px;
+    --radius:    10px;
+    --font-head: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── FONDO DECORATIVO ───────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(192,132,252,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(129,140,248,.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAVBAR ─────────────────────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,14,18,.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; gap: 20px;
+    height: 56px;
+  }
+
+  nav a.logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    letter-spacing: .05em;
+    color: var(--text);
+  }
+
+  nav a.logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 4px; margin-left: auto; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: .82rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all .2s;
+    letter-spacing: .03em;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--text);
+    background: var(--border);
+  }
+
+  .nav-links a.active { color: var(--accent); }
+
+  /* ── HEADER ─────────────────────────────────────────────────── */
+  header {
+    position: relative; z-index: 1;
+    padding: 48px 32px 24px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+
+  header h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    letter-spacing: .06em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  header h1 span { color: var(--accent); }
+
+  #stats-bar {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    font-size: .78rem; color: var(--muted); font-weight: 300;
+  }
+
+  .stat { display: flex; flex-direction: column; align-items: flex-end; }
+  .stat strong { font-size: 2.3rem; font-family: var(--font-head); color: var(--text); letter-spacing: .04em; }
+
+  /* ── CONTROLES ──────────────────────────────────────────────── */
+  .controls {
+    position: relative; z-index: 1;
+    padding: 0 32px 24px;
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
+
+  .search-wrap {
+    position: relative; flex: 1; min-width: 200px; max-width: 340px;
+  }
+
+  .search-wrap svg {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 16px; opacity: .4;
+  }
+
+  #buscador {
+    width: 100%; background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 9px 14px 9px 38px;
+    color: var(--text); font-family: var(--font-body); font-size: .88rem;
+    outline: none; transition: border-color .2s;
+  }
+
+  #buscador:focus { border-color: var(--accent); }
+  #buscador::placeholder { color: var(--muted); }
+
+  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-body); font-size: .78rem; font-weight: 500;
+    padding: 7px 16px; border-radius: 100px;
+    cursor: pointer; transition: all .2s; white-space: nowrap;
+    letter-spacing: .02em;
+  }
+
+  .chip:hover { border-color: var(--accent); color: var(--text); }
+
+  .chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  .btn-admin {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-body); font-size: .78rem; font-weight: 500;
+    padding: 7px 18px; border-radius: 100px;
+    cursor: pointer; transition: all .2s;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .btn-admin:hover { background: var(--accent); color: #000; }
+
+  /* ── GALERÍA ─────────────────────────────────────────────────── */
+  #gallery {
+    position: relative; z-index: 1;
+    padding: 0 32px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-w), 1fr));
+    gap: 20px;
+  }
+
+  /* ── CARD DE SERIE ──────────────────────────────────────────── */
+  .serie-card {
+    position: relative;
+    cursor: pointer;
+    border-radius: var(--radius);
+    overflow: visible;
+    transition: transform .25s ease;
+  }
+
+  .serie-card:hover { transform: translateY(-4px); }
+
+  .serie-card .cover-wrap {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .serie-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter .3s;
+  }
+
+  /* Gris si no tengo ningún tomo */
+  .serie-card.sin-tomos img { filter: grayscale(1) brightness(.5); }
+
+  /* Overlay de progreso */
+  .cover-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.88));
+    padding: 28px 10px 10px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+
+  .progress-bar-wrap {
+    height: 3px; background: rgba(255,255,255,.15); border-radius: 2px; overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%; border-radius: 2px;
+    background: var(--tengo);
+    transition: width .4s ease;
+  }
+
+  .progress-bar-fill.completa { background: var(--accent); }
+
+  .cover-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .7rem; color: rgba(255,255,255,.7);
+  }
+
+  /* Badge de estado */
+  .badge-estado {
+    position: absolute; top: 8px; right: 8px;
+    font-size: .6rem; font-weight: 600; letter-spacing: .06em;
+    padding: 3px 8px; border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .badge-estado.siguiendo { background: var(--accent); color: #000; }
+  .badge-estado.terminada { background: #1a2e1a; color: var(--tengo); border: 1px solid var(--tengo); }
+  .badge-estado.cancelada { background: #2e1a1a; color: #f87171; border: 1px solid #f87171; }
+  .badge-estado.unico     { background: #1a1a2e; color: var(--accent2); border: 1px solid var(--accent2); }
+
+  /* Nombre debajo de la carta */
+  .serie-name {
+    margin-top: 8px;
+    font-size: .78rem; font-weight: 500;
+    color: var(--text);
+    line-height: 1.2;
+    text-align: center;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .serie-editorial {
+    font-size: .68rem; color: var(--muted);
+    text-align: center; margin-top: 2px;
+  }
+
+  /* ── MODAL DE DETALLE ───────────────────────────────────────── */
+  #modal {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+
+  #modal.open { display: flex; }
+
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    max-width: 680px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    position: relative;
+    animation: modalIn .25s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(.96) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-header {
+    display: flex; gap: 20px;
+    padding: 24px 24px 0;
+  }
+
+  .modal-cover {
+    width: 110px; flex-shrink: 0;
+    border-radius: 8px; overflow: hidden;
+    aspect-ratio: 2/3;
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+
+  .modal-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .modal-info { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+
+  .modal-title {
+    font-family: var(--font-head);
+    font-size: 2rem; letter-spacing: .06em;
+    color: var(--text); line-height: 1;
+  }
+
+  .modal-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .tag {
+    font-size: .72rem; padding: 4px 10px; border-radius: 6px;
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .tag.highlight { border-color: var(--accent); color: var(--accent); }
+
+  /* Barras de progreso del modal */
+  .modal-progress { padding: 0 24px; margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+
+  .prog-row label {
+    display: flex; justify-content: space-between;
+    font-size: .78rem; color: var(--muted); margin-bottom: 6px;
+  }
+
+  .prog-row label strong { color: var(--text); }
+
+  .prog-track {
+    height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden;
+  }
+
+  .prog-fill {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    transition: width .5s ease;
+  }
+
+  /* Grilla de tomos en el modal */
+  .modal-tomos { padding: 20px 24px 24px; }
+
+  .modal-tomos h3 {
+    font-size: .78rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: .1em; margin-bottom: 12px;
+  }
+
+  .tomos-grid {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+
+  .tomo-dot {
+    width: 28px; height: 28px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .65rem; font-weight: 600;
+    cursor: default;
+  }
+
+  .tomo-dot.tengo { background: var(--tengo); color: #000; }
+  .tomo-dot.notengo { background: var(--border); color: var(--muted); }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--muted); width: 32px; height: 32px;
+    border-radius: 50%; cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+  }
+
+  .modal-close:hover { color: var(--text); border-color: var(--text); }
+
+  /* ── ESTADO VACÍO / CARGA ───────────────────────────────────── */
+  #empty-state {
+    grid-column: 1/-1;
+    padding: 80px 0;
+    text-align: center;
+    color: var(--muted);
+    display: none;
+  }
+
+  #empty-state svg { opacity: .3; margin-bottom: 16px; }
+
+  .skeleton {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    aspect-ratio: 2/3;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: .6; }
+    50%       { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    :root { --card-w: 130px; }
+    header { padding: 28px 16px 16px; }
+    .controls { padding: 0 16px 16px; }
+    #gallery { padding: 0 16px 40px; gap: 12px; }
+    .modal-header { flex-direction: column; }
+    .modal-cover { width: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="/index.html">
+    <img src="../Sol.png" class="logo-icon">
+    <span>Biblioteca</span>Fabri Lsq
+  </a>
+  <div class="nav-links">
+    <a href="/WebManga/index.html" class="active">Mangas</a>
+    <a href="/WebJuegos/index.html">Juegos</a>
+    <a href="/admin/index.html">Admin</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <h1>MAN<span>GAS</span></h1>
+    <p style="color:var(--muted);font-size:.85rem;margin-top:4px;">Tu colección personal</p>
+  </div>
+  <div id="stats-bar">
+    <div class="stat"><strong id="stat-series">—</strong>Series</div>
+    <div class="stat"><strong id="stat-tomos">—</strong>Tomos</div>
+    <div class="stat"><strong id="stat-completas">—</strong>Completas</div>
+  </div>
+</header>
+
+<!-- CONTROLES -->
+<div class="controls">
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="buscador" placeholder="Buscar manga..." oninput="filtrar()">
+  </div>
+
+  <div class="filter-group" id="filtros">
+    <button class="chip active" data-filtro="todos" onclick="setFiltro(this)">Todos</button>
+    <button class="chip" data-filtro="tengo" onclick="setFiltro(this)">Lo tengo</button>
+    <button class="chip" data-filtro="siguiendo" onclick="setFiltro(this)">Siguiendo</button>
+    <button class="chip" data-filtro="completa" onclick="setFiltro(this)">Completas</button>
+    <button class="chip" data-filtro="unico" onclick="setFiltro(this)">Tomo único</button>
+  </div>
+
+  <div class="filter-group">
+    <button class="chip" data-orden="nombre" onclick="setOrden(this)">A→Z</button>
+    <button class="chip" data-orden="progreso" onclick="setOrden(this)">Progreso</button>
+    <button class="chip" data-orden="tomos" onclick="setOrden(this)">Tomos</button>
+  </div>
+
+  <a href="/admin/index.html" class="btn-admin">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+    Agregar
+  </a>
+</div>
+
+<!-- GALERÍA -->
+<div id="gallery">
+  <!-- Skeletons de carga -->
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+  <div class="skeleton"></div>
+
+  <div id="empty-state">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+    <p>No se encontraron mangas</p>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" onclick="if(event.target===this)cerrarModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+
+    <div class="modal-header">
+      <div class="modal-cover"><img id="modal-img" src="" alt=""></div>
+      <div class="modal-info">
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-meta" id="modal-meta"></div>
+      </div>
+    </div>
+
+    <div class="modal-progress">
+      <div class="prog-row">
+        <label>Progreso ARG <strong id="prog-label-arg"></strong></label>
+        <div class="prog-track"><div class="prog-fill" id="prog-arg"></div></div>
+      </div>
+      <div class="prog-row">
+        <label>Progreso JPN <strong id="prog-label-jpn"></strong></label>
+        <div class="prog-track"><div class="prog-fill" id="prog-jpn"></div></div>
+      </div>
+    </div>
+
+    <div class="modal-tomos">
+      <h3>Tomos</h3>
+      <div class="tomos-grid" id="modal-tomos-grid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── CONFIG ─────────────────────────────────────────────── */
+const API = '/.netlify/functions/airtable';
+
+/* ── ESTADO ─────────────────────────────────────────────── */
+let todosLosMangas = [];
+let filtroActivo   = 'todos';
+let ordenActivo    = 'nombre';
+
+/* ── CARGA DESDE AIRTABLE ───────────────────────────────── */
+async function cargarMangas() {
+  let records = [], offset = null;
+
+  try {
+    do {
+      let url = `${API}?table=Mangas&pageSize=100&sortField=Nombre&sortDir=asc`;
+      if (offset) url += `&offset=${encodeURIComponent(offset)}`;
+
+      const res = await fetch(url);
+
+      if (!res.ok) throw new Error(`Error ${res.status}`);
+      const data = await res.json();
+      records = records.concat(data.records);
+      offset = data.offset || null;
+
+    } while (offset);
+
+    todosLosMangas = records.map(r => ({ id: r.id, ...r.fields }));
+    renderizar();
+    actualizarStats();
+
+  } catch(e) {
+    console.error('Error cargando Airtable:', e);
+    document.getElementById('gallery').innerHTML =
+      `<div id="empty-state" style="display:block;grid-column:1/-1">
+        <p style="color:#f87171">Error conectando con Airtable.<br>
+        <small style="color:var(--muted)">${e.message}</small></p>
+      </div>`;
+  }
+}
+
+/* ── JIKAN: buscar cover ────────────────────────────────── */
+const coverCache = {};
+
+async function buscarCover(nombre) {
+  if (coverCache[nombre]) return coverCache[nombre];
+
+  try {
+    const q = encodeURIComponent(nombre.replace(/([a-z])([A-Z])/g, '$1 $2'));
+    const res = await fetch(`https://api.jikan.moe/v4/manga?q=${q}&limit=1&sfw=true`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const url = data.data?.[0]?.images?.jpg?.large_image_url || null;
+    coverCache[nombre] = url;
+    return url;
+  } catch {
+    return null;
+  }
+}
+
+/* ── RENDER ─────────────────────────────────────────────── */
+async function renderizar() {
+  const gallery = document.getElementById('gallery');
+  const busqueda = document.getElementById('buscador').value.toLowerCase().trim();
+
+  // Filtrar
+  let lista = todosLosMangas.filter(m => {
+    const nombre = (m.Nombre || '').toLowerCase();
+    if (busqueda && !nombre.includes(busqueda)) return false;
+
+    if (filtroActivo === 'tengo')     return (m.TomosQTengo || 0) > 0;
+    if (filtroActivo === 'siguiendo') return m.Siguiendo;
+    if (filtroActivo === 'completa')  return (m.TomosQTengo || 0) >= (m.UltimoTomoARG || 1) && !m.TomoUnico;
+    if (filtroActivo === 'unico')     return m.TomoUnico;
+    return true;
+  });
+
+  // Ordenar
+  lista.sort((a, b) => {
+    if (ordenActivo === 'nombre')   return (a.Nombre || '').localeCompare(b.Nombre || '');
+    if (ordenActivo === 'progreso') {
+      const pa = (a.TomosQTengo || 0) / (a.UltimoTomoARG || 1);
+      const pb = (b.TomosQTengo || 0) / (b.UltimoTomoARG || 1);
+      return pb - pa;
+    }
+    if (ordenActivo === 'tomos') return (b.UltimoTomoARG || 0) - (a.UltimoTomoARG || 0);
+    return 0;
+  });
+
+  // Limpiar galería
+  gallery.innerHTML = '';
+
+  const empty = document.createElement('div');
+  empty.id = 'empty-state';
+  empty.style.display = lista.length === 0 ? 'block' : 'none';
+  empty.innerHTML = `<p>No se encontraron mangas</p>`;
+  gallery.appendChild(empty);
+
+  if (lista.length === 0) return;
+
+  // Renderizar cards (con covers en background async)
+  lista.forEach(manga => {
+    const card = crearCard(manga);
+    gallery.appendChild(card);
+
+    // Cargar cover async
+    const tengo   = manga.TomosQTengo   || 0;
+    const totalAR = manga.UltimoTomoARG || 1;
+
+    if (manga.CoverURL) {
+      card.querySelector('img').src = manga.CoverURL;
+    } else {
+      buscarCover(manga.Nombre).then(url => {
+        if (url) {
+          card.querySelector('img').src = url;
+          // Guardar en Airtable para la próxima vez (sin await para no bloquear)
+          actualizarCover(manga.id, url);
+          manga.CoverURL = url;
+        }
+      });
+    }
+  });
+}
+
+function crearCard(m) {
+  const tengo   = m.TomosQTengo   || 0;
+  const totalAR = m.UltimoTomoARG || 1;
+  const pct     = Math.min(100, Math.round((tengo / totalAR) * 100));
+  const completa = tengo >= totalAR && !m.TomoUnico;
+
+  const card = document.createElement('div');
+  card.className = `serie-card${tengo === 0 ? ' sin-tomos' : ''}`;
+  card.dataset.id = m.id;
+  card.onclick = () => abrirModal(m);
+
+  // Badge estado
+  let badgeClass = '', badgeText = '';
+  if (m.TomoUnico)                       { badgeClass = 'unico';     badgeText = 'Único'; }
+  else if (m.Siguiendo)                  { badgeClass = 'siguiendo'; badgeText = 'Sigo'; }
+  else if (m.EstadoARG === 'Terminada')  { badgeClass = 'terminada'; badgeText = 'Terminada'; }
+  else if (m.EstadoARG === 'Cancelada')  { badgeClass = 'cancelada'; badgeText = 'Cancelada'; }
+
+  card.innerHTML = `
+    <div class="cover-wrap">
+      <img src="/WebManga/placeholder.jpg" alt="${m.Nombre}" loading="lazy">
+      ${badgeClass ? `<div class="badge-estado ${badgeClass}">${badgeText}</div>` : ''}
+      <div class="cover-overlay">
+        <div class="cover-meta">
+          <span>${tengo}/${m.TomoUnico ? 1 : totalAR}</span>
+          <span>${pct}%</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill${completa ? ' completa' : ''}" style="width:${pct}%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="serie-name">${formatNombre(m.Nombre)}</div>
+    <div class="serie-editorial">${m.Editorial || ''}</div>
+  `;
+
+  return card;
+}
+
+/* ── MODAL ──────────────────────────────────────────────── */
+function abrirModal(m) {
+  const tengo   = m.TomosQTengo   || 0;
+  const totalAR = m.UltimoTomoARG || 1;
+  const totalJP = m.UltimoTomoJPN || 1;
+  const pctAR   = Math.min(100, Math.round((tengo / totalAR) * 100));
+  const pctJP   = Math.min(100, Math.round((tengo / totalJP) * 100));
+
+  document.getElementById('modal-img').src   = m.CoverURL || '';
+  document.getElementById('modal-title').textContent = formatNombre(m.Nombre);
+
+  // Tags
+  const meta = document.getElementById('modal-meta');
+  meta.innerHTML = [
+    m.Editorial   ? `<span class="tag">${m.Editorial}</span>` : '',
+    m.EstadoARG   ? `<span class="tag">${m.EstadoARG} ARG</span>` : '',
+    m.EstadoJPN   ? `<span class="tag">${m.EstadoJPN} JPN</span>` : '',
+    m.Siguiendo   ? `<span class="tag highlight">Siguiendo</span>` : '',
+    m.TomoUnico   ? `<span class="tag highlight">Tomo único</span>` : '',
+  ].join('');
+
+  // Progreso
+  document.getElementById('prog-label-arg').textContent = `${tengo}/${totalAR}`;
+  document.getElementById('prog-label-jpn').textContent = `${tengo}/${totalJP}`;
+  document.getElementById('prog-arg').style.width = pctAR + '%';
+  document.getElementById('prog-jpn').style.width = pctJP + '%';
+
+  // Grilla de tomos: adivinamos cuáles tiene basado en TomosQTengo
+  // (en Airtable guardamos el total, no cuáles específicamente)
+  // Reemplazar desde:  const grid = document.getElementById('modal-tomos-grid');
+  // Hasta el cierre del bloque de tomos
+
+  const grid = document.getElementById('modal-tomos-grid');
+  grid.innerHTML = '';
+
+  if (m.TomoUnico) {
+    const dot = document.createElement('div');
+    dot.className = `tomo-dot ${tengo > 0 ? 'tengo' : 'notengo'}`;
+    dot.textContent = '✓';
+    grid.appendChild(dot);
+  } else {
+    // Parsear TomosLista si existe: "2,3" o "1,3,5-8"
+    const tomosSet = parsearTomosLista(m.TomosLista, tengo, totalAR);
+    for (let i = 1; i <= totalAR; i++) {
+      const dot = document.createElement('div');
+      dot.className = `tomo-dot ${tomosSet.has(i) ? 'tengo' : 'notengo'}`;
+      dot.textContent = i;
+      grid.appendChild(dot);
+    }
+  }
+
+  document.getElementById('modal').classList.add('open');
+  document.addEventListener('keydown', escModal);
+}
+
+function cerrarModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.removeEventListener('keydown', escModal);
+}
+
+function escModal(e) { if (e.key === 'Escape') cerrarModal(); }
+
+/* ── FILTROS / ORDEN ────────────────────────────────────── */
+function setFiltro(btn) {
+  document.querySelectorAll('[data-filtro]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filtroActivo = btn.dataset.filtro;
+  renderizar();
+}
+
+function setOrden(btn) {
+  document.querySelectorAll('[data-orden]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ordenActivo = btn.dataset.orden;
+  renderizar();
+}
+
+function filtrar() { renderizar(); }
+
+/* ── STATS ──────────────────────────────────────────────── */
+function actualizarStats() {
+  const series   = todosLosMangas.length;
+  const tomos    = todosLosMangas.reduce((s, m) => s + (m.TomosQTengo || 0), 0);
+  const completas = todosLosMangas.filter(m =>
+    !m.TomoUnico && (m.TomosQTengo || 0) >= (m.UltimoTomoARG || 1)
+  ).length;
+
+  document.getElementById('stat-series').textContent   = series;
+  document.getElementById('stat-tomos').textContent    = tomos;
+  document.getElementById('stat-completas').textContent = completas;
+}
+
+/* ── HELPERS ────────────────────────────────────────────── */
+function formatNombre(n) {
+  if (!n) return '';
+  // "ChainsawMan" → "Chainsaw Man", "OnePiece" → "One Piece"
+  return n.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2');
+}
+// Parsea "2,3" o "1,3,5-8" → Set {1,3,5,6,7,8}
+// Si TomosLista está vacío, cae al comportamiento anterior (primeros N tomos)
+function parsearTomosLista(lista, fallbackN, total) {
+  if (lista && lista.trim()) {
+    const set = new Set();
+    lista.split(',').forEach(parte => {
+      parte = parte.trim();
+      const rango = parte.match(/^(\d+)-(\d+)$/);
+      if (rango) {
+        for (let i = +rango[1]; i <= +rango[2]; i++) set.add(i);
+      } else if (/^\d+$/.test(parte)) {
+        set.add(+parte);
+      }
+    });
+    return set;
+  }
+  // Fallback: primeros N consecutivos
+  const set = new Set();
+  for (let i = 1; i <= fallbackN; i++) set.add(i);
+  return set;
+}
+
+async function actualizarCover(id, url) {
+  try {
+    await fetch(`${API}?table=Mangas&id=${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fields: { CoverURL: url } })
+    });
+  } catch(e) { /* silencioso */ }
+}
+
+/* ── INIT ───────────────────────────────────────────────── */
+cargarMangas();
+</script>
+</body>
+</html>
