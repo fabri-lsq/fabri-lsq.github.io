@@ -215,8 +215,8 @@ async function cargarJuegos() {
 async function buscarCoverRAWG(nombre) {
   if (coverCache[nombre]) return coverCache[nombre];
   // TODO: al migrar a Netlify, mover la key a variable de entorno
-  const RAWG_KEY = 'TU_RAWG_KEY_AQUI';
-  if (RAWG_KEY === 'TU_RAWG_KEY_AQUI') return null; // sin key, no busca
+  const RAWG_KEY = 'b755818b96de489b8891c2c22b3dfdf9';
+  if (RAWG_KEY === 'b755818b96de489b8891c2c22b3dfdf9') return null; // sin key, no busca
   try {
     const q = encodeURIComponent(nombre.replace(/([a-z])([A-Z])/g, '$1 $2'));
     const res = await fetch(`https://api.rawg.io/api/games?key=${RAWG_KEY}&search=${q}&page_size=1`);
