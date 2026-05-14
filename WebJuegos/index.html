@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juegos — Biblioteca Virtual</title>
+<link rel="icon" href="/Control.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .logo-icon { width: 28px; height: 28px; object-fit: contain; }
+  :root {
+    --bg: #0e0e12; --surface: #16161d; --border: #2a2a38;
+    --accent: #818cf8; --accent2: #c084fc;
+    --text: #e2e2f0; --muted: #6b6b8a;
+    --tengo: #a3e635; --card-w: 160px; --radius: 10px;
+    --font-head: 'Bebas Neue', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(129,140,248,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 90% 80%, rgba(192,132,252,.05) 0%, transparent 60%);
+  }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(14,14,18,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 20px; height: 56px; }
+  nav a.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-head); font-size: 1.5rem; letter-spacing: .05em; color: var(--text); }
+  nav a.logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 4px; margin-left: auto; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: .82rem; font-weight: 500; padding: 6px 14px; border-radius: 6px; transition: all .2s; letter-spacing: .03em; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--border); }
+  .nav-links a.active { color: var(--accent); }
+  header { position: relative; z-index: 1; padding: 48px 32px 24px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  header h1 { font-family: var(--font-head); font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: .06em; line-height: 1; color: var(--text); }
+  header h1 span { color: var(--accent); }
+  #stats-bar { display: flex; gap: 24px; flex-wrap: wrap; font-size: .78rem; color: var(--muted); font-weight: 300; }
+  .stat { display: flex; flex-direction: column; align-items: flex-end; }
+  .stat strong { font-size: 2.3rem; font-family: var(--font-head); color: var(--text); letter-spacing: .04em; }
+  .controls { position: relative; z-index: 1; padding: 0 32px 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 340px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; opacity: .4; }
+  #buscador { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 9px 14px 9px 38px; color: var(--text); font-family: var(--font-body); font-size: .88rem; outline: none; transition: border-color .2s; }
+  #buscador:focus { border-color: var(--accent); }
+  #buscador::placeholder { color: var(--muted); }
+  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { background: var(--surface); border: 1px solid var(--border); color: var(--muted); font-family: var(--font-body); font-size: .78rem; font-weight: 500; padding: 7px 16px; border-radius: 100px; cursor: pointer; transition: all .2s; white-space: nowrap; letter-spacing: .02em; }
+  .chip:hover { border-color: var(--accent); color: var(--text); }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-admin { margin-left: auto; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: var(--font-body); font-size: .78rem; font-weight: 500; padding: 7px 18px; border-radius: 100px; cursor: pointer; transition: all .2s; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .btn-admin:hover { background: var(--accent); color: #fff; }
+  #gallery { position: relative; z-index: 1; padding: 0 32px 60px; display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--card-w), 1fr)); gap: 20px; }
+  .juego-card { position: relative; cursor: pointer; border-radius: var(--radius); transition: transform .25s ease; }
+  .juego-card:hover { transform: translateY(-4px); }
+  .juego-card .cover-wrap { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3/4; background: var(--surface); border: 1px solid var(--border); }
+  .juego-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter .3s; }
+  .juego-card.no-instalado img { filter: grayscale(.6) brightness(.7); }
+  .cover-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,.9)); padding: 28px 10px 10px; display: flex; flex-direction: column; gap: 4px; }
+  .cover-meta { display: flex; justify-content: space-between; align-items: center; font-size: .7rem; color: rgba(255,255,255,.7); }
+  .horas-badge { font-family: var(--font-head); font-size: .9rem; letter-spacing: .04em; }
+  .logros-bar-wrap { height: 3px; background: rgba(255,255,255,.15); border-radius: 2px; overflow: hidden; }
+  .logros-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width .4s; }
+  .logros-bar-fill.full { background: var(--tengo); }
+  .badge-plataforma { position: absolute; top: 8px; left: 8px; font-size: .58rem; font-weight: 700; letter-spacing: .06em; padding: 3px 7px; border-radius: 4px; text-transform: uppercase; }
+  .badge-plataforma.steam   { background: #1b2838; color: #66c0f4; border: 1px solid #66c0f4; }
+  .badge-plataforma.xbox    { background: #1a2e1a; color: #52b043; border: 1px solid #52b043; }
+  .badge-plataforma.epic    { background: #1a1a1a; color: #fff; border: 1px solid #555; }
+  .badge-plataforma.ubisoft { background: #1a1a2e; color: #6aaee8; border: 1px solid #6aaee8; }
+  .badge-plataforma.otros   { background: #2a1a2e; color: var(--accent2); border: 1px solid var(--accent2); }
+  .badge-instalado { position: absolute; top: 8px; right: 8px; font-size: .58rem; font-weight: 700; padding: 3px 7px; border-radius: 4px; background: var(--tengo); color: #000; }
+  .juego-name { margin-top: 8px; font-size: .78rem; font-weight: 500; color: var(--text); line-height: 1.2; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #modal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.75); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 20px; }
+  #modal.open { display: flex; }
+  .modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; max-width: 640px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; animation: modalIn .25s ease; }
+  @keyframes modalIn { from { opacity:0; transform:scale(.96) translateY(12px); } to { opacity:1; transform:scale(1) translateY(0); } }
+  .modal-header { display: flex; gap: 20px; padding: 24px 24px 0; }
+  .modal-cover { width: 110px; flex-shrink: 0; border-radius: 8px; overflow: hidden; aspect-ratio: 3/4; background: var(--bg); border: 1px solid var(--border); }
+  .modal-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .modal-info { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .modal-title { font-family: var(--font-head); font-size: 2rem; letter-spacing: .06em; color: var(--text); line-height: 1; }
+  .modal-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: .72rem; padding: 4px 10px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
+  .tag.hl { border-color: var(--accent); color: var(--accent); }
+  .tag.ok { border-color: var(--tengo); color: var(--tengo); }
+  .modal-stats { padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .modal-stat-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .modal-stat-val { font-family: var(--font-head); font-size: 2rem; letter-spacing: .04em; color: var(--text); }
+  .modal-stat-label { font-size: .68rem; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .08em; }
+  .modal-prog { padding: 0 24px 24px; }
+  .modal-prog label { display: flex; justify-content: space-between; font-size: .76rem; color: var(--muted); margin-bottom: 6px; }
+  .modal-prog label strong { color: var(--text); }
+  .prog-track { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .5s; }
+  .modal-close { position: absolute; top: 14px; right: 14px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: .9rem; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .modal-close:hover { color: var(--text); border-color: var(--text); }
+  #empty-state { grid-column: 1/-1; padding: 80px 0; text-align: center; color: var(--muted); display: none; }
+  @media (max-width: 600px) {
+    header { padding: 28px 16px 16px; } .controls { padding: 0 16px 16px; }
+    #gallery { padding: 0 16px 40px; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    .modal-header { flex-direction: column; } .modal-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/index.html">
+    <img class="logo-icon" src="../Sol.png" alt="">
+    <span>Biblioteca</span>Fabri Lsq
+  </a>
+  <div class="nav-links">
+    <a href="/WebManga/index.html">Mangas</a>
+    <a href="/WebJuegos/index.html" class="active">Juegos</a>
+    <a href="/WebLibros/index.html">Libros</a>
+  </div>
+</nav>
+
+<header>
+  <div>
+    <h1>JUE<span>GOS</span></h1>
+    <p style="color:var(--muted);font-size:.85rem;margin-top:4px">Tu colección de juegos</p>
+  </div>
+  <div id="stats-bar">
+    <div class="stat"><strong id="stat-total">—</strong>Juegos</div>
+    <div class="stat"><strong id="stat-horas">—</strong>Horas</div>
+    <div class="stat"><strong id="stat-instalados">—</strong>Instalados</div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="buscador" placeholder="Buscar juego..." oninput="filtrar()">
+  </div>
+  <div class="filter-group">
+    <button class="chip active" data-filtro="todos"      onclick="setFiltro(this)">Todos</button>
+    <button class="chip"        data-filtro="instalado"  onclick="setFiltro(this)">Instalados</button>
+    <button class="chip"        data-filtro="steam"      onclick="setFiltro(this)">Steam</button>
+    <button class="chip"        data-filtro="xbox"       onclick="setFiltro(this)">Xbox</button>
+    <button class="chip"        data-filtro="epic"       onclick="setFiltro(this)">Epic</button>
+    <button class="chip"        data-filtro="ubisoft"    onclick="setFiltro(this)">Ubisoft</button>
+  </div>
+  <div class="filter-group">
+    <button class="chip active" data-orden="nombre"  onclick="setOrden(this)">A→Z</button>
+    <button class="chip"        data-orden="horas"   onclick="setOrden(this)">Horas ↓</button>
+    <button class="chip"        data-orden="logros"  onclick="setOrden(this)">Logros ↓</button>
+  </div>
+  <a href="/admin/index.html#juegos" class="btn-admin">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+    Agregar
+  </a>
+</div>
+
+<div id="gallery">
+  <div id="empty-state"><p>No se encontraron juegos</p></div>
+</div>
+
+<div id="modal" onclick="if(event.target===this)cerrarModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-cover"><img id="modal-img" src="" alt=""></div>
+      <div class="modal-info">
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-meta"  id="modal-meta"></div>
+      </div>
+    </div>
+    <div class="modal-stats">
+      <div class="modal-stat-box"><div class="modal-stat-val" id="modal-horas">—</div><div class="modal-stat-label">Horas</div></div>
+      <div class="modal-stat-box"><div class="modal-stat-val" id="modal-logros">—</div><div class="modal-stat-label">Logros</div></div>
+      <div class="modal-stat-box"><div class="modal-stat-val" id="modal-pct">—</div><div class="modal-stat-label">Completado</div></div>
+    </div>
+    <div class="modal-prog">
+      <label>Logros <strong id="prog-label"></strong></label>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG (mover a variable de entorno al ir a Netlify) ──
+const API = '/.netlify/functions/airtable';
+
+let todosLosJuegos = [];
+let filtroActivo   = 'todos';
+let ordenActivo    = 'nombre';
+
+const coverCache = {};
+
+// ── CARGA ─────────────────────────────────────────────────
+async function cargarJuegos() {
+  mostrarSkeletons();
+  let records = [], offset = null;
+  try {
+    do {
+      let url = `${API}?table=Juegos&pageSize=100&sortField=Nombre&sortDir=asc`;
+      if (offset) url += `&offset=${encodeURIComponent(offset)}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Error ${res.status}`);
+      const data = await res.json();
+      records = records.concat(data.records);
+      offset = data.offset || null;
+    } while (offset);
+    todosLosJuegos = records.map(r => ({ id: r.id, ...r.fields }));
+    renderizar();
+    actualizarStats();
+  } catch(e) {
+    document.getElementById('gallery').innerHTML =
+      `<div style="grid-column:1/-1;padding:60px;text-align:center;color:#f87171">Error: ${e.message}</div>`;
+  }
+}
+
+// ── RAWG: cover automático ────────────────────────────────
+async function buscarCoverRAWG(nombre) {
+  if (coverCache[nombre]) return coverCache[nombre];
+  // TODO: al migrar a Netlify, mover la key a variable de entorno
+  const RAWG_KEY = 'TU_RAWG_KEY_AQUI';
+  if (RAWG_KEY === 'TU_RAWG_KEY_AQUI') return null; // sin key, no busca
+  try {
+    const q = encodeURIComponent(nombre.replace(/([a-z])([A-Z])/g, '$1 $2'));
+    const res = await fetch(`https://api.rawg.io/api/games?key=${RAWG_KEY}&search=${q}&page_size=1`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const url = data.results?.[0]?.background_image || null;
+    coverCache[nombre] = url;
+    return url;
+  } catch { return null; }
+}
+
+// ── RENDER ────────────────────────────────────────────────
+function renderizar() {
+  const gallery  = document.getElementById('gallery');
+  const busqueda = document.getElementById('buscador').value.toLowerCase().trim();
+
+  let lista = todosLosJuegos.filter(j => {
+    const nombre = (j.Nombre || '').toLowerCase();
+    if (busqueda && !nombre.includes(busqueda)) return false;
+    if (filtroActivo === 'instalado') return j.Instalado;
+    if (['steam','xbox','epic','ubisoft'].includes(filtroActivo))
+      return (j.Plataforma || '').toLowerCase().includes(filtroActivo);
+    return true;
+  });
+
+  lista.sort((a, b) => {
+    if (ordenActivo === 'nombre') return (a.Nombre||'').localeCompare(b.Nombre||'');
+    if (ordenActivo === 'horas')  return (b.Horas||0) - (a.Horas||0);
+    if (ordenActivo === 'logros') return (b.PromedioLogros||0) - (a.PromedioLogros||0);
+    return 0;
+  });
+
+  gallery.innerHTML = '';
+
+  if (lista.length === 0) {
+    const e = document.createElement('div');
+    e.id = 'empty-state'; e.style.display = 'block';
+    e.style.cssText = 'grid-column:1/-1;padding:80px 0;text-align:center;color:var(--muted)';
+    e.innerHTML = '<p>No se encontraron juegos</p>';
+    gallery.appendChild(e); return;
+  }
+
+  lista.forEach(juego => {
+    const card = crearCard(juego);
+    gallery.appendChild(card);
+    if (juego.CoverURL) {
+      card.querySelector('img').src = juego.CoverURL;
+    } else {
+      buscarCoverRAWG(juego.Nombre).then(url => {
+        if (url) {
+          card.querySelector('img').src = url;
+          juego.CoverURL = url;
+          actualizarCover(juego.id, url);
+        }
+      });
+    }
+  });
+}
+
+function crearCard(j) {
+  const pct = Math.min(100, j.PromedioLogros || 0);
+  const plat = (j.Plataforma || 'otros').toLowerCase();
+  const platClass = plat.includes('steam') ? 'steam' : plat.includes('xbox') ? 'xbox' :
+    plat.includes('epic') ? 'epic' : plat.includes('ubisoft') ? 'ubisoft' : 'otros';
+  const platLabel = plat.includes('steam') ? 'Steam' : plat.includes('xbox') ? 'Xbox' :
+    plat.includes('epic') ? 'Epic' : plat.includes('ubisoft') ? 'Ubisoft' : j.Plataforma || '';
+
+  const card = document.createElement('div');
+  card.className = `juego-card${j.Instalado ? '' : ' no-instalado'}`;
+  card.onclick = () => abrirModal(j);
+  card.innerHTML = `
+    <div class="cover-wrap">
+      <img src="" alt="${j.Nombre}" loading="lazy">
+      <div class="badge-plataforma ${platClass}">${platLabel}</div>
+      ${j.Instalado ? '<div class="badge-instalado">Instalado</div>' : ''}
+      <div class="cover-overlay">
+        <div class="cover-meta">
+          <span class="horas-badge">${j.Horas || 0}h</span>
+          <span>${pct}%</span>
+        </div>
+        <div class="logros-bar-wrap">
+          <div class="logros-bar-fill${pct >= 100 ? ' full' : ''}" style="width:${pct}%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="juego-name">${formatNombre(j.Nombre)}</div>
+  `;
+  return card;
+}
+
+// ── MODAL ─────────────────────────────────────────────────
+function abrirModal(j) {
+  const pct     = Math.min(100, j.PromedioLogros || 0);
+  const logros  = j.LogrosTotal === 99 ? 'N/A' : `${j.MisLogros||0}/${j.LogrosTotal||0}`;
+
+  document.getElementById('modal-img').src = j.CoverURL || '';
+  document.getElementById('modal-title').textContent = formatNombre(j.Nombre);
+  document.getElementById('modal-horas').textContent  = (j.Horas || 0) + 'h';
+  document.getElementById('modal-logros').textContent = logros;
+  document.getElementById('modal-pct').textContent    = pct + '%';
+  document.getElementById('prog-label').innerHTML     = `<strong>${logros}</strong>`;
+  document.getElementById('prog-fill').style.width    = pct + '%';
+
+  const plat = j.Plataforma || '—';
+  document.getElementById('modal-meta').innerHTML = [
+    plat ? `<span class="tag">${plat}</span>` : '',
+    j.Instalado       ? `<span class="tag ok">Instalado</span>` : '<span class="tag">No instalado</span>',
+    j.AdmiteEspanol   ? `<span class="tag hl">🌍 Español</span>` : '',
+  ].join('');
+
+  document.getElementById('modal').classList.add('open');
+  document.addEventListener('keydown', escModal);
+}
+
+function cerrarModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.removeEventListener('keydown', escModal);
+}
+function escModal(e) { if (e.key === 'Escape') cerrarModal(); }
+
+// ── FILTROS ───────────────────────────────────────────────
+function setFiltro(btn) {
+  document.querySelectorAll('[data-filtro]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); filtroActivo = btn.dataset.filtro; renderizar();
+}
+function setOrden(btn) {
+  document.querySelectorAll('[data-orden]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); ordenActivo = btn.dataset.orden; renderizar();
+}
+function filtrar() { renderizar(); }
+
+// ── STATS ─────────────────────────────────────────────────
+function actualizarStats() {
+  document.getElementById('stat-total').textContent     = todosLosJuegos.length;
+  document.getElementById('stat-horas').textContent     = todosLosJuegos.reduce((s,j) => s+(j.Horas||0), 0);
+  document.getElementById('stat-instalados').textContent = todosLosJuegos.filter(j => j.Instalado).length;
+}
+
+// ── HELPERS ───────────────────────────────────────────────
+function formatNombre(n) {
+  if (!n) return '';
+  return n.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2');
+}
+
+function mostrarSkeletons() {
+  const g = document.getElementById('gallery');
+  g.innerHTML = Array(12).fill(`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);aspect-ratio:3/4;animation:pulse 1.5s ease-in-out infinite"></div>`).join('');
+  const s = document.createElement('style');
+  s.textContent = '@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}';
+  document.head.appendChild(s);
+}
+
+async function actualizarCover(id, url) {
+  try {
+    await fetch(`${API}?table=Juegos&id=${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fields: { CoverURL: url } })
+    });
+  } catch {}
+}
+
+cargarJuegos();
+</script>
+</body>
+</html>
