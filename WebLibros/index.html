@@ -185,19 +185,37 @@ async function cargarLibros() {
   }
 }
 
-// ── Open Library: cover automático ───────────────────────
+// ── Open Library: cover + género automático ──────────────
 async function buscarCoverOpenLibrary(titulo, autor) {
   const key = titulo + autor;
   if (coverCache[key]) return coverCache[key];
   try {
     const q = encodeURIComponent(`${titulo} ${autor}`);
-    const res = await fetch(`https://openlibrary.org/search.json?q=${q}&fields=cover_i&limit=1`);
+    const res = await fetch(`https://openlibrary.org/search.json?q=${q}&fields=cover_i,subject&limit=1`);
     if (!res.ok) return null;
     const data = await res.json();
-    const coverId = data.docs?.[0]?.cover_i;
-    if (!coverId) return null;
-    const url = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+    const doc = data.docs?.[0];
+    if (!doc) return null;
+
+    const coverId = doc.cover_i;
+    const url = coverId ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg` : null;
     coverCache[key] = url;
+
+    // Si tiene subjects, tomamos el primero como género y lo guardamos en Airtable
+    if (doc.subject?.length) {
+      const genero = doc.subject[0];
+      // Buscar el libro en todosLosLibros para obtener su id
+      const libro = todosLosLibros.find(l => l.Titulo === titulo && !l.Genero);
+      if (libro) {
+        libro.Genero = genero; // actualizar local
+        fetch(`${API}?table=Libros&id=${libro.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fields: { Genero: genero } })
+        }).catch(() => {});
+      }
+    }
+
     return url;
   } catch { return null; }
 }
@@ -273,14 +291,25 @@ function abrirModal(l) {
   document.getElementById('modal-title').textContent = l.Titulo || '';
   document.getElementById('modal-autor').textContent = l.Autor  || '';
   document.getElementById('modal-meta').innerHTML = [
-    l.Genero     ? `<span class="tag hl">${l.Genero}</span>`         : '',
-    l.Anio       ? `<span class="tag">${l.Anio}</span>`               : '',
-    l.Leido      ? `<span class="tag ok">✓ Leído</span>`             : '<span class="tag">Pendiente</span>',
-    l.Adquirido  ? `<span class="tag ok">Adquirido</span>`           : '<span class="tag">No adquirido</span>',
+    l.Genero     ? `<span class="tag hl">${l.Genero}</span>`                                          : '',
+    l.Anio       ? `<span class="tag">${l.Anio}</span>`                                               : '',
+    l.Leido      ? `<span class="tag ok">✓ Leído</span>`                                             : '<span class="tag">Pendiente</span>',
+    l.Adquirido  ? `<span class="tag">📅 ${formatearFecha(l.Adquirido)}</span>`                      : '',
   ].join('');
   document.getElementById('modal').classList.add('open');
   document.addEventListener('keydown', escModal);
 }
+// Formatea "2024-07-30" → "30/07/2024"
+function formatearFecha(fecha) {
+  if (!fecha) return '';
+  // Airtable a veces devuelve "1970-01-01" cuando el campo es checkbox viejo — lo ignoramos
+  if (fecha === '1970-01-01') return '';
+  try {
+    const [y, m, d] = fecha.split('-');
+    return `${d}/${m}/${y}`;
+  } catch { return fecha; }
+}
+
 function cerrarModal() {
   document.getElementById('modal').classList.remove('open');
   document.removeEventListener('keydown', escModal);
