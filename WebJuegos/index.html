@@ -180,7 +180,9 @@
 
 <script>
 // ── CONFIG (mover a variable de entorno al ir a Netlify) ──
-const API = '/.netlify/functions/airtable';
+const API = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+  ? 'https://biblioteca-virtual-lsq.netlify.app/.netlify/functions/airtable'
+  : '/.netlify/functions/airtable';
 
 let todosLosJuegos = [];
 let filtroActivo   = 'todos';

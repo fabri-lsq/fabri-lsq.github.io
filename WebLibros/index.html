@@ -60,6 +60,7 @@
   .badge-leido { position: absolute; top: 8px; right: 8px; font-size: .58rem; font-weight: 700; letter-spacing: .06em; padding: 3px 7px; border-radius: 4px; text-transform: uppercase; }
   .badge-leido.si  { background: var(--leido); color: #000; }
   .badge-leido.no  { background: #2a1a1a; color: var(--muted); border: 1px solid var(--border); }
+  .badge-leido.leyendo { background: #1a2233; color: #60a5fa; border: 1px solid #60a5fa; }
   .badge-genero { position: absolute; top: 8px; left: 8px; font-size: .58rem; font-weight: 700; letter-spacing: .04em; padding: 3px 7px; border-radius: 4px; background: rgba(0,0,0,.7); color: var(--accent); border: 1px solid rgba(251,146,60,.3); }
   .libro-name { margin-top: 8px; font-size: .78rem; font-weight: 500; color: var(--text); line-height: 1.2; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .libro-autor { font-size: .68rem; color: var(--muted); text-align: center; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -109,7 +110,7 @@
   <div id="stats-bar">
     <div class="stat"><strong id="stat-total">—</strong>Libros</div>
     <div class="stat"><strong id="stat-leidos">—</strong>Leídos</div>
-    <div class="stat"><strong id="stat-adquiridos">—</strong>Adquiridos</div>
+    <div class="stat"><strong id="stat-adquiridos">—</strong>Leyendo</div>
   </div>
 </header>
 
@@ -119,10 +120,10 @@
     <input type="text" id="buscador" placeholder="Buscar libro o autor..." oninput="filtrar()">
   </div>
   <div class="filter-group">
-    <button class="chip active" data-filtro="todos"      onclick="setFiltro(this)">Todos</button>
-    <button class="chip"        data-filtro="leido"      onclick="setFiltro(this)">Leídos</button>
-    <button class="chip"        data-filtro="noleido"    onclick="setFiltro(this)">Pendientes</button>
-    <button class="chip"        data-filtro="adquirido"  onclick="setFiltro(this)">Adquiridos</button>
+    <button class="chip active" data-filtro="todos"     onclick="setFiltro(this)">Todos</button>
+    <button class="chip"        data-filtro="leido"     onclick="setFiltro(this)">Leídos</button>
+    <button class="chip"        data-filtro="leyendo"   onclick="setFiltro(this)">Leyendo</button>
+    <button class="chip"        data-filtro="pendiente" onclick="setFiltro(this)">Pendientes</button>
   </div>
   <div class="filter-group">
     <button class="chip active" data-orden="titulo" onclick="setOrden(this)">A→Z</button>
@@ -155,7 +156,9 @@
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────
-const API = '/.netlify/functions/airtable';
+const API = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+  ? 'https://biblioteca-virtual-lsq.netlify.app/.netlify/functions/airtable'
+  : '/.netlify/functions/airtable';
 
 let todosLosLibros = [];
 let filtroActivo   = 'todos';
@@ -229,9 +232,9 @@ function renderizar() {
     const titulo = (l.Titulo || '').toLowerCase();
     const autor  = (l.Autor  || '').toLowerCase();
     if (busqueda && !titulo.includes(busqueda) && !autor.includes(busqueda)) return false;
-    if (filtroActivo === 'leido')     return l.Leido;
-    if (filtroActivo === 'noleido')   return !l.Leido;
-    if (filtroActivo === 'adquirido') return l.Adquirido;
+    if (filtroActivo === 'leido')     return l.Estado === 'Leído';
+    if (filtroActivo === 'leyendo')   return l.Estado === 'Leyendo';
+    if (filtroActivo === 'pendiente') return l.Estado === 'Pendiente' || !l.Estado;
     return true;
   });
 
@@ -276,7 +279,7 @@ function crearCard(l) {
     <div class="cover-wrap">
       <img src="" alt="${l.Titulo}" loading="lazy">
       ${l.Genero ? `<div class="badge-genero">${l.Genero}</div>` : ''}
-      <div class="badge-leido ${l.Leido ? 'si' : 'no'}">${l.Leido ? 'Leído' : 'Pendiente'}</div>
+      <div class="badge-leido ${l.Estado === 'Leído' ? 'si' : l.Estado === 'Leyendo' ? 'leyendo' : 'no'}">${l.Estado || 'Pendiente'}</div>
       <div class="cover-overlay"></div>
     </div>
     <div class="libro-name">${l.Titulo || ''}</div>
@@ -293,7 +296,8 @@ function abrirModal(l) {
   document.getElementById('modal-meta').innerHTML = [
     l.Genero     ? `<span class="tag hl">${l.Genero}</span>`                                          : '',
     l.Anio       ? `<span class="tag">${l.Anio}</span>`                                               : '',
-    l.Leido      ? `<span class="tag ok">✓ Leído</span>`                                             : '<span class="tag">Pendiente</span>',
+    l.Estado === 'Leído'   ? `<span class="tag ok">✓ Leído</span>`      :
+    l.Estado === 'Leyendo' ? `<span class="tag hl">📖 Leyendo</span>`   :                         `<span class="tag">Pendiente</span>`,
     l.Adquirido  ? `<span class="tag">📅 ${formatearFecha(l.Adquirido)}</span>`                      : '',
   ].join('');
   document.getElementById('modal').classList.add('open');
@@ -330,8 +334,8 @@ function filtrar() { renderizar(); }
 // ── STATS ─────────────────────────────────────────────────
 function actualizarStats() {
   document.getElementById('stat-total').textContent     = todosLosLibros.length;
-  document.getElementById('stat-leidos').textContent    = todosLosLibros.filter(l => l.Leido).length;
-  document.getElementById('stat-adquiridos').textContent = todosLosLibros.filter(l => l.Adquirido).length;
+  document.getElementById('stat-leidos').textContent    = todosLosLibros.filter(l => l.Estado === 'Leído').length;
+  document.getElementById('stat-adquiridos').textContent = todosLosLibros.filter(l => l.Estado === 'Leyendo').length;
 }
 
 // ── HELPERS ───────────────────────────────────────────────
